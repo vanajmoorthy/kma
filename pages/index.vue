@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container" :class="{ 'is-loaded': loaded }">
 		<div id="title-holder">
 			<div id="spacer">g</div>
 			<div id="control">
@@ -61,10 +61,12 @@
 				</p>
 			</div>
 		</div>
-		<div class="project2" ref="section1"></div>
-		<div class="project3" ref="section1"></div>
-		<div class="project4" ref="section1"></div>
+		<div class="project2" ref="section3"></div>
+		<div class="project3" ref="section4"></div>
+		<div class="project4" ref="section5"></div>
+		<div id="spacer2"></div>
 
+		<Footer ref="section6" id="footer"></Footer>
 	</div>
 </template>
 
@@ -72,20 +74,41 @@
 export default {
 	data() {
 		return {
+			loaded: false,
 			currentSection: 0, // start at the first section
 		};
 	},
 	methods: {
-		scrollToNextSection() {
-			this.currentSection++; // increment the current section
+		updateTitleHolderOpacity() {
+			const footerComponent = this.$refs.section6;
+			const footerElement = footerComponent.$el;  // Get root DOM element of the component
+			const rect = footerElement.getBoundingClientRect();
+			const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+			const distanceFromBottom = viewportHeight - rect.top;
 
-			// define the sections we want to scroll to
-			const sections = ["section1", "section2", "section3"];
+			// Change these values as needed to adjust when the fade starts and ends
+			const fadeStart = 100;
+			const fadeEnd = 0;
+
+			let opacity;
+			if (distanceFromBottom < fadeStart) {
+				opacity = 1;
+			} else if (distanceFromBottom > fadeEnd) {
+				opacity = 0;
+			} else {
+				opacity = (fadeEnd - distanceFromBottom) / (fadeEnd - fadeStart);
+			}
+
+			document.querySelector("#title-holder").style.opacity = opacity;
+			console.log("updated")
+		},
+		scrollToNextSection() {
+			this.currentSection++;
+
+			const sections = ["section1", "section2", "section3", "section4", "section5", "section6"];
 
 			// check if we're at the end of the sections, if so, reset to 0
-			if (this.currentSection >= sections.length) {
-				this.currentSection = 0;
-			}
+
 
 			// scroll to the section
 			this.$refs[sections[this.currentSection]].scrollIntoView({
@@ -95,9 +118,18 @@ export default {
 	},
 	mounted() {
 		document.documentElement.classList.add("index-page");
+		this.$nextTick(() => {
+			window.addEventListener("scroll", this.updateTitleHolderOpacity);
+			setTimeout(() => {
+				window.scrollTo(0, 0);
+				this.loaded = true;
+			}, 0);
+		})
+		window.addEventListener("scroll", this.updateTitleHolderOpacity);
 	},
 	beforeUnmount() {
 		document.documentElement.classList.remove("index-page");
+		window.removeEventListener("scroll", this.updateTitleHolderOpacity);
 	},
 };
 </script>
@@ -109,6 +141,12 @@ export default {
 </style>
 
 <style scoped>
+#footer {
+	position: relative;
+	/* top: -7rem; */
+	/* margin-bottom: -7rem; */
+}
+
 #title-holder {
 	position: sticky;
 	display: flex;
@@ -116,6 +154,12 @@ export default {
 	justify-content: space-between;
 	top: calc(100vh - 10rem);
 	z-index: 1;
+	transition: 0.2s ease opacity;
+}
+
+#spacer2 {
+	position: relative;
+	margin-top: -7rem;
 }
 
 #control {
@@ -191,8 +235,6 @@ export default {
 	display: flex;
 	align-items: center;
 }
-
-
 
 .project1 {
 	background: no-repeat url("@/assets/hero1.jpg");
