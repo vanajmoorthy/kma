@@ -39,7 +39,7 @@
 					Architecture 2018, The I.I.A National Awards for Excellence
 					2018.
 				</p>
-				<p>
+				<p class="hide">
 					We have executed projects in the diverse locations of Delhi
 					N.C.R including Noida , Gurgaon, Manesar & Bawal as also in
 					Agra, Mumbai, Indore (M.P.) and Kullu (H.P).
@@ -72,9 +72,9 @@ export default {
 		return {
 			loaded: false,
 			currentSection: 0,
-			projectNames: ['Courtyard Home', 'Read more', 'G Residence', 'Farmhouse', 'Creative Travel Office', 'Footer'],
+			projectNames: ['Courtyard Home', 'Read more', 'G Residence', 'Farmhouse', 'Creative Office', 'Footer'],
 			currentProject: 'Courtyard Home',
-			sections: [] // Add this line
+			sections: []
 		};
 	},
 	methods: {
@@ -101,7 +101,6 @@ export default {
 			const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 			const distanceFromBottom = viewportHeight - rect.top;
 
-			// Change these values as needed to adjust when the fade starts and ends
 			const fadeStart = 100;
 			const fadeEnd = 0;
 
@@ -222,10 +221,16 @@ export default {
 	font-size: 3rem;
 }
 
+@media screen and (max-width: 650px) {
+	#control>h1 {
+		display: none;
+	}
+}
+
 #project-name,
 #spacer {
-	width: 200px;
-	margin: 0 2rem;
+	min-width: 200px;
+	margin: 0 1rem;
 }
 
 #spacer {
@@ -235,6 +240,7 @@ export default {
 #project-name {
 	display: flex;
 	align-items: center;
+	justify-content: flex-end;
 }
 
 .right-arrow {
@@ -335,5 +341,65 @@ export default {
 .fade-enter,
 .fade-leave-to {
 	opacity: 0;
+}
+
+@media screen and (max-width:780px) {
+	.about>div>p {
+		margin: 1rem;
+	}
+
+	.about,
+	.project1,
+	.project2,
+	.project3,
+	.project4 {
+		top: -3.65rem
+	}
+
+	#title-holder {
+		top: calc(100vh - 7rem);
+	}
+}
+
+@media screen and (max-width:680px) {
+	.about>div {
+		flex-direction: column;
+		/* margin-bottom: 1rem; */
+	}
+}
+
+@media screen and (max-width:510px) {
+
+	#spacer,
+	#project-name {
+		min-width: 0px;
+	}
+
+	#spacer,
+	#project-name {
+		width: 39%;
+	}
+
+
+	#project-name {
+		margin: 0;
+		margin-top: 1.3rem;
+	}
+
+	#project-name>h3 {
+		font-size: 1.2rem;
+	}
+
+	.hide {
+		display: none;
+	}
+
+	.right-arrow {
+		height: 20px;
+		width: 23px;
+		margin-left: 0.1rem;
+	}
+
+
 }
 </style>
