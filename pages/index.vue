@@ -1,71 +1,69 @@
 <template>
-	<transition name="fade">
-		<div class="container" v-if="loaded">
-			<div id="title-holder">
-				<div id="spacer">g</div>
-				<div id="control">
-					<h1>KM&A</h1>
-					<img class="down-arrow" src="@/assets/down.png" alt="down arrow" @click="scrollToNextSection" />
-				</div>
-				<div id="project-name">
-					<transition name="fade">
-						<h3 key="projectName">{{ currentProject }} <img class="right-arrow" src="@/assets/forward.png"
-								alt="View project" /> </h3>
-					</transition>
-				</div>
+	<div class="container" :class="{ 'is-loaded': loaded }">
+		<div id="title-holder">
+			<div id="spacer">g</div>
+			<div id="control">
+				<h1>KM&A</h1>
+				<img class="down-arrow" src="@/assets/down.png" alt="down arrow" @click="scrollToNextSection" />
 			</div>
-			<div class="project1" ref="section1"></div>
-			<div class="about" ref="section2">
-				<div>
-					<p>
-						Established in 1990, Kumar Moorthy & Associates is an award
-						winning partnership firm of architects and interior
-						designers based in Delhi. In the twenty nine years since
-						inception we have undertaken and successfully completed a
-						wide range of design works in the diverse fields of
-						residential design and interiors, institutional and hotel
-						design, commercial and office spaces and interiors. The
-						clients for the above include notable industrial groups,
-						private limited companies, charitable and non government
-						organisations, government agencies and public figures other
-						than private individuals.
-
-						<br />
-						<br />
-						The firm has been honoured to receive awards in various
-						categories under the prestigious J.K. Architect of the Year
-						Awards in 1995 and 1997, and the Indian Institute of
-						Interior Designers- MK Award 2004 & 2006, Best Office
-						Architecture India, Asia Pacific Property Awards
-						Architecture 2018, The I.I.A National Awards for Excellence
-						2018.
-					</p>
-					<p>
-						We have executed projects in the diverse locations of Delhi
-						N.C.R including Noida , Gurgaon, Manesar & Bawal as also in
-						Agra, Mumbai, Indore (M.P.) and Kullu (H.P).
-						<br /><br />
-						Recent notable projects by the firm span a diverse spectrum
-						of concept, philosophy and materials and include an building
-						in the Indo Saracenic heritage campus of a 125 year old
-						public school in Indore and a low cost building using &
-						exemplifying alternative technology for a rehabilitation
-						centre in West Delhi for an NGO for disabled persons to a
-						factory for a large upcoming Indo American lighting JV in
-						Bawal, Haryana other than corporate office buildings &
-						interiors in Gurgaon & NOIDA and a small number of
-						significant residential projects including farmhouses.
-					</p>
-				</div>
+			<div id="project-name">
+				<transition name="fade">
+					<h3 key="projectName">{{ currentProject }} <img class="right-arrow" src="@/assets/forward.png"
+							alt="View project" /> </h3>
+				</transition>
 			</div>
-			<div class="project2" ref="section3"></div>
-			<div class="project3" ref="section4"></div>
-			<div class="project4" ref="section5"></div>
-			<div id="spacer2"></div>
-
-			<Footer ref="section6" id="footer"></Footer>
 		</div>
-	</transition>
+		<div class="project1" ref="section1"></div>
+		<div class="about" ref="section2">
+			<div>
+				<p>
+					Established in 1990, Kumar Moorthy & Associates is an award
+					winning partnership firm of architects and interior
+					designers based in Delhi. In the twenty nine years since
+					inception we have undertaken and successfully completed a
+					wide range of design works in the diverse fields of
+					residential design and interiors, institutional and hotel
+					design, commercial and office spaces and interiors. The
+					clients for the above include notable industrial groups,
+					private limited companies, charitable and non government
+					organisations, government agencies and public figures other
+					than private individuals.
+
+					<br />
+					<br />
+					The firm has been honoured to receive awards in various
+					categories under the prestigious J.K. Architect of the Year
+					Awards in 1995 and 1997, and the Indian Institute of
+					Interior Designers- MK Award 2004 & 2006, Best Office
+					Architecture India, Asia Pacific Property Awards
+					Architecture 2018, The I.I.A National Awards for Excellence
+					2018.
+				</p>
+				<p>
+					We have executed projects in the diverse locations of Delhi
+					N.C.R including Noida , Gurgaon, Manesar & Bawal as also in
+					Agra, Mumbai, Indore (M.P.) and Kullu (H.P).
+					<br /><br />
+					Recent notable projects by the firm span a diverse spectrum
+					of concept, philosophy and materials and include an building
+					in the Indo Saracenic heritage campus of a 125 year old
+					public school in Indore and a low cost building using &
+					exemplifying alternative technology for a rehabilitation
+					centre in West Delhi for an NGO for disabled persons to a
+					factory for a large upcoming Indo American lighting JV in
+					Bawal, Haryana other than corporate office buildings &
+					interiors in Gurgaon & NOIDA and a small number of
+					significant residential projects including farmhouses.
+				</p>
+			</div>
+		</div>
+		<div class="project2" ref="section3"></div>
+		<div class="project3" ref="section4"></div>
+		<div class="project4" ref="section5"></div>
+		<div id="spacer2"></div>
+
+		<Footer ref="section6" id="footer"></Footer>
+	</div>
 </template>
 
 <script>
@@ -74,7 +72,7 @@ export default {
 		return {
 			loaded: false,
 			currentSection: 0,
-			projectNames: ['Courtyard Home', 'Read more', 'G Residence', 'Farmhouse', 'Creative Office', 'Footer'],
+			projectNames: ['Courtyard Home', 'Read more', 'G Residence', 'Farmhouse', 'Creative Travel Office', 'Footer'],
 			currentProject: 'Courtyard Home',
 			sections: [] // Add this line
 		};
@@ -104,7 +102,7 @@ export default {
 			const distanceFromBottom = viewportHeight - rect.top;
 
 			// Change these values as needed to adjust when the fade starts and ends
-			const fadeStart = 50;
+			const fadeStart = 100;
 			const fadeEnd = 0;
 
 			let opacity;
@@ -149,7 +147,6 @@ export default {
 			}, 0);
 		});
 		window.addEventListener("scroll", this.updateSectionOnScroll); // Add this line
-
 	},
 	beforeUnmount() {
 		document.documentElement.classList.remove("index-page");
@@ -179,6 +176,15 @@ export default {
 	top: calc(100vh - 10rem);
 	z-index: 1;
 	transition: 0.2s ease opacity;
+}
+
+.container {
+	opacity: 0;
+	transition: 0.2s ease opacity;
+}
+
+.is-loaded {
+	opacity: 1 !important;
 }
 
 #spacer2 {
