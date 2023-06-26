@@ -7,7 +7,10 @@
 				<img class="down-arrow" src="@/assets/down.png" alt="down arrow" @click="scrollToNextSection" />
 			</div>
 			<div id="project-name">
-				<h3>Courtyard Home <img class="right-arrow" src="@/assets/forward.png" alt="View project" /> </h3>
+				<transition name="fade">
+					<h3 key="projectName">{{ currentProject }} <img class="right-arrow" src="@/assets/forward.png"
+							alt="View project" /> </h3>
+				</transition>
 			</div>
 		</div>
 		<div class="project1" ref="section1"></div>
@@ -51,13 +54,6 @@
 					Bawal, Haryana other than corporate office buildings &
 					interiors in Gurgaon & NOIDA and a small number of
 					significant residential projects including farmhouses.
-
-				<div id="read-more">
-					<NuxtLink to="/projects">Read more
-
-						<img class="right-arrow" src="@/assets/forward.png" alt="" />
-					</NuxtLink>
-				</div>
 				</p>
 			</div>
 		</div>
@@ -75,10 +71,29 @@ export default {
 	data() {
 		return {
 			loaded: false,
-			currentSection: 0, // start at the first section
+			currentSection: 0,
+			projectNames: ['Courtyard Home', 'Read more', 'G Residence', 'Farmhouse', 'Creative Office', 'Footer'],
+			currentProject: 'Courtyard Home',
+			sections: [] // Add this line
 		};
 	},
 	methods: {
+		updateSectionOnScroll() {
+			for (let i = 0; i < this.sections.length; i++) {
+				const section = this.sections[i];
+				const rect = section.getBoundingClientRect();
+
+				if (rect.top <= window.innerHeight * 0.25 && rect.bottom > window.innerHeight * 0.75) {
+					if (this.currentSection !== i) {
+						this.currentSection = i;
+						this.currentProject = this.projectNames[i];
+					}
+					break;
+				}
+			}
+		},
+
+
 		updateTitleHolderOpacity() {
 			const footerComponent = this.$refs.section6;
 			const footerElement = footerComponent.$el;  // Get root DOM element of the component
@@ -87,7 +102,7 @@ export default {
 			const distanceFromBottom = viewportHeight - rect.top;
 
 			// Change these values as needed to adjust when the fade starts and ends
-			const fadeStart = 100;
+			const fadeStart = 50;
 			const fadeEnd = 0;
 
 			let opacity;
@@ -120,12 +135,19 @@ export default {
 		document.documentElement.classList.add("index-page");
 		this.$nextTick(() => {
 			window.addEventListener("scroll", this.updateTitleHolderOpacity);
+
+			// Get references to the sections
+			this.sections = ["section1", "section2", "section3", "section4", "section5", "section6"].map(section => {
+				return this.$refs[section];
+			});
+
 			setTimeout(() => {
 				window.scrollTo(0, 0);
 				this.loaded = true;
 			}, 0);
-		})
-		window.addEventListener("scroll", this.updateTitleHolderOpacity);
+		});
+		window.addEventListener("scroll", this.updateSectionOnScroll); // Add this line
+
 	},
 	beforeUnmount() {
 		document.documentElement.classList.remove("index-page");
@@ -295,5 +317,15 @@ export default {
 	max-width: 450px;
 	margin: 2rem;
 	text-align: justify;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: 0.5s ease opacity;
+}
+
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
 }
 </style>
