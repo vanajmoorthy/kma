@@ -1,0 +1,23 @@
+@font-face {
+	font-family: "NeueHaas45";
+	src: url("@/assets/NeueHaasDisplayThin.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "NeueHaas45Italic";
+	src: url("@/assets/NeueHaasDisplayThinItalic.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "NeueHaas45Bold";
+	src: url("@/assets/NeueHaasDisplayRoman.ttf") format("truetype");
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: "NeueHaas45";
+}
