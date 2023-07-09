@@ -31,13 +31,15 @@
 
 					<br />
 					<br />
-					The firm has been honoured to receive awards in various
-					categories under the prestigious J.K. Architect of the Year
-					Awards in 1995 and 1997, and the Indian Institute of
-					Interior Designers- MK Award 2004 & 2006, Best Office
-					Architecture India, Asia Pacific Property Awards
-					Architecture 2018, The I.I.A National Awards for Excellence
-					2018.
+					<span class="hide2">
+						The firm has been honoured to receive awards in various
+						categories under the prestigious J.K. Architect of the Year
+						Awards in 1995 and 1997, and the Indian Institute of
+						Interior Designers- MK Award 2004 & 2006, Best Office
+						Architecture India, Asia Pacific Property Awards
+						Architecture 2018, The I.I.A National Awards for Excellence
+						2018.
+					</span>
 				</p>
 				<p class="hide">
 					We have executed projects in the diverse locations of Delhi
@@ -72,7 +74,7 @@ export default {
 		return {
 			loaded: false,
 			currentSection: 0,
-			projectNames: ['Courtyard Home', 'Read more', 'G Residence', 'Farmhouse', 'Creative Office', 'Footer'],
+			projectNames: ['Magnolia Home', 'Read more', 'G Residence', 'Farmhouse', 'Creative Office', 'Footer'],
 			currentProject: 'Courtyard Home',
 			sections: []
 		};
@@ -172,9 +174,10 @@ export default {
 	display: flex;
 	/* height: 0px; */
 	justify-content: space-between;
-	top: calc(100vh - 10rem);
+	top: calc(100vh - 9rem);
 	z-index: 1;
 	transition: 0.2s ease opacity;
+	margin-bottom: 2rem;
 }
 
 .container {
@@ -223,14 +226,18 @@ export default {
 
 @media screen and (max-width: 650px) {
 	#control>h1 {
-		display: none;
+		opacity: 0;
 	}
 }
 
 #project-name,
 #spacer {
 	min-width: 200px;
-	margin: 0 1rem;
+	/* margin: 0 1rem; */
+}
+
+.right-arrow {
+	padding-right: 1rem;
 }
 
 #spacer {
@@ -239,7 +246,7 @@ export default {
 
 #project-name {
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: flex-end;
 }
 
@@ -255,6 +262,8 @@ export default {
 	display: flex;
 	align-items: center;
 	/* padding-right: 2rem; */
+	position: relative;
+	top: -7.5px;
 }
 
 #read-more {
@@ -345,7 +354,7 @@ export default {
 
 @media screen and (max-width:780px) {
 	.about>div>p {
-		margin: 1rem;
+		/* margin: 1rem; */
 	}
 
 	.about,
@@ -353,18 +362,43 @@ export default {
 	.project2,
 	.project3,
 	.project4 {
-		top: -3.65rem
+		/* top: -3.65rem */
 	}
 
 	#title-holder {
-		top: calc(100vh - 7rem);
+		/* top: calc(100vh - 7rem); */
 	}
 }
 
 @media screen and (max-width:680px) {
+	.about>div>p {
+		/* margin: 1rem; */
+	}
+
+	.about>div {
+		/* padding-left: 0rem;
+		padding-right: 0rem; */
+	}
+
+	.about,
+	.project1,
+	.project2,
+	.project3,
+	.project4 {
+		/* top: -3.65rem */
+	}
+
+	#title-holder {
+		/* top: calc(100vh - 7rem); */
+	}
+
 	.about>div {
 		flex-direction: column;
 		/* margin-bottom: 1rem; */
+	}
+
+	.hide {
+		display: none;
 	}
 }
 
@@ -387,7 +421,7 @@ export default {
 	}
 
 	#project-name>h3 {
-		font-size: 1.2rem;
+		font-size: 1.0rem;
 	}
 
 	.hide {
@@ -401,5 +435,15 @@ export default {
 	}
 
 
+}
+
+@media screen and (max-width:420px) {
+	.about>div>p {
+		margin: 1rem;
+	}
+
+	.hide2 {
+		display: none;
+	}
 }
 </style>

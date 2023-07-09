@@ -66,28 +66,27 @@ nav {
 	z-index: 2;
 	justify-content: center;
 	padding: 2rem 0rem;
-	background-image: linear-gradient(to bottom,
-			/* rgba(0, 0, 0, 0.6), */
-			/* rgba(0, 0, 0, 0.55), */
-			/* rgba(0, 0, 0, 0.5), */
-			/* rgba(0, 0, 0, 0.45), */
-			/* rgba(0, 0, 0, 0.4), */
-			rgba(0, 0, 0, 0.35),
-			rgba(0, 0, 0, 0.3),
-			rgba(0, 0, 0, 0.25),
-			rgba(0, 0, 0, 0.2),
-			rgba(0, 0, 0, 0.15),
-			rgba(0, 0, 0, 0.1),
-			rgba(0, 0, 0, 0.09),
-			rgba(0, 0, 0, 0.08),
-			rgba(0, 0, 0, 0.07),
-			rgba(0, 0, 0, 0.06),
-			rgba(0, 0, 0, 0.05),
-			rgba(0, 0, 0, 0.04),
-			rgba(0, 0, 0, 0.03),
-			rgba(0, 0, 0, 0.02),
-			rgba(0, 0, 0, 0.01),
-			rgba(0, 0, 0, 0));
+	background: linear-gradient(rgba(0, 0, 0, 0.8) 0%,
+			rgba(0, 0, 0, 0.7) 10%,
+			rgba(0, 0, 0, 0.65) 15%,
+			rgba(0, 0, 0, 0.6) 20%,
+			rgba(0, 0, 0, 0.55) 25%,
+
+			rgba(0, 0, 0, 0.5) 30%,
+			rgba(0, 0, 0, 0.45) 35%,
+
+			rgba(0, 0, 0, 0.4) 40%,
+			rgba(0, 0, 0, 0.35) 45%,
+
+			rgba(0, 0, 0, 0.3) 50%,
+			rgba(0, 0, 0, 0.25) 55%,
+			rgba(0, 0, 0, 0.2) 60%,
+			rgba(0, 0, 0, 0.15) 65%,
+			rgba(0, 0, 0, 0.09) 72%,
+
+			rgba(0, 0, 0, 0.06) 80%,
+			rgba(0, 0, 0, 0) 100%);
+
 	/* backdrop-filter: blur(2px); */
 	color: white;
 	transition: 0.2s ease background-color;
@@ -200,7 +199,7 @@ ul {
 	max-height: 300px !important;
 	margin-top: 1rem;
 	/* background-color: rgb(233 233 233); */
-	padding: 1rem 2rem !important;
+	padding: 0rem 1rem !important;
 }
 
 #nav-links {
@@ -223,7 +222,8 @@ ul {
 	#nav-links {
 		display: flex;
 		flex-direction: column;
-		padding: 0 2rem;
+		padding: 0rem 1rem !important;
+
 	}
 
 	.home-link {
@@ -236,7 +236,7 @@ ul {
 	}
 
 	#nav-links>a {
-		width: 300px;
+		width: min-content;
 	}
 
 	#home {
@@ -253,7 +253,7 @@ ul {
 	#nav-links {
 		overflow: hidden;
 		max-height: 0px;
-		margin-top: -3rem;
+		/* margin-top: -3rem; */
 	}
 }
 </style>
