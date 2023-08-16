@@ -6,11 +6,15 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "slicemachine": "start-slicemachine"
   },
   "devDependencies": {
+    "@nuxtjs/prismic": "^3.0.1",
+    "@slicemachine/adapter-nuxt": "^0.3.10",
     "@types/node": "^18",
-    "nuxt": "^3.5.2"
+    "nuxt": "^3.5.2",
+    "slice-machine-ui": "^1.8.0"
   },
   "dependencies": {
     "vue-silentbox": "^3.0.4"

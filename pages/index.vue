@@ -174,7 +174,7 @@ export default {
 	display: flex;
 	/* height: 0px; */
 	justify-content: space-between;
-	top: calc(100vh - 9rem);
+	top: calc(100vh - 6rem);
 	z-index: 1;
 	transition: 0.2s ease opacity;
 	margin-bottom: 2rem;
@@ -183,6 +183,7 @@ export default {
 .container {
 	opacity: 0;
 	transition: 0.2s ease opacity;
+	/* overflow-x: hidden; */
 }
 
 .is-loaded {
@@ -206,7 +207,7 @@ export default {
 	width: 2.5rem;
 	height: 2.5rem;
 	margin: 0 auto;
-	margin-top: 1rem;
+	/* margin-top: 1rem; */
 	transition: 0.2s ease all;
 }
 
@@ -219,13 +220,13 @@ export default {
 
 }
 
-#control>h1 {
+#control > h1 {
 	color: white;
-	font-size: 3rem;
+	font-size: 2rem;
 }
 
 @media screen and (max-width: 650px) {
-	#control>h1 {
+	#control > h1 {
 		opacity: 0;
 	}
 }
@@ -256,7 +257,7 @@ export default {
 	margin-left: 0.2rem;
 }
 
-#project-name>h3 {
+#project-name > h3 {
 	color: white;
 	font-size: 1.5rem;
 	display: flex;
@@ -273,7 +274,7 @@ export default {
 	height: 4rem;
 }
 
-#read-more>a {
+#read-more > a {
 	text-decoration: none;
 	color: white;
 	font-size: 1.5rem;
@@ -305,7 +306,7 @@ export default {
 	top: -7rem;
 	z-index: -1;
 	/* background-color: black; */
-	width: 100vw;
+	/* width: 100vw; */
 	height: calc(100vh);
 	overflow: hidden;
 	/* object-fit: contain; */
@@ -328,13 +329,13 @@ export default {
 	/* padding: 0 10rem; */
 }
 
-.about>div {
+.about > div {
 	display: flex;
 	/* max-width: 400px; */
 	padding: 1rem;
 }
 
-.about>div>p {
+.about > div > p {
 	font-size: 1.2rem;
 	/* line-height: 2rem; */
 	max-width: 450px;
@@ -353,7 +354,7 @@ export default {
 }
 
 @media screen and (max-width:780px) {
-	.about>div>p {
+	.about > div > p {
 		/* margin: 1rem; */
 	}
 
@@ -371,11 +372,11 @@ export default {
 }
 
 @media screen and (max-width:680px) {
-	.about>div>p {
+	.about > div > p {
 		/* margin: 1rem; */
 	}
 
-	.about>div {
+	.about > div {
 		/* padding-left: 0rem;
 		padding-right: 0rem; */
 	}
@@ -392,7 +393,7 @@ export default {
 		/* top: calc(100vh - 7rem); */
 	}
 
-	.about>div {
+	.about > div {
 		flex-direction: column;
 		/* margin-bottom: 1rem; */
 	}
@@ -420,7 +421,7 @@ export default {
 		margin-top: 1.3rem;
 	}
 
-	#project-name>h3 {
+	#project-name > h3 {
 		font-size: 1.0rem;
 	}
 
@@ -438,7 +439,7 @@ export default {
 }
 
 @media screen and (max-width:420px) {
-	.about>div>p {
+	.about > div > p {
 		margin: 1rem;
 	}
 
