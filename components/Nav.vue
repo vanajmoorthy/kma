@@ -1,23 +1,4 @@
 <template>
-	<!-- <nav>
-		<ul>
-			<li>
-				<NuxtLink to="/">Home</NuxtLink>
-			</li>
-			<li>
-				<NuxtLink to="/projects">Projects</NuxtLink>
-			</li>
-			<li>
-				<NuxtLink to="/about">About</NuxtLink>
-			</li>
-			<li>
-				<NuxtLink to="/awards">Awards</NuxtLink>
-			</li>
-			<li>
-				<NuxtLink to="/contact">Contact</NuxtLink>
-			</li>
-		</ul>
-	</nav> -->
 	<nav :class="{ navexpand: isMenuOpen }">
 		<div id="home">
 			<h1>KM&A</h1>
@@ -103,7 +84,7 @@ ul {
 	background-color: black;
 }
 
-#nav-links>a {
+#nav-links > a {
 	text-decoration: none;
 	margin: 1rem;
 	color: white;
@@ -116,7 +97,7 @@ ul {
 
 }
 
-#nav-links>a::before {
+#nav-links > a::before {
 	content: "";
 	position: absolute;
 	display: block;
@@ -129,7 +110,7 @@ ul {
 	transition: transform 0.15s ease;
 }
 
-#nav-links>a:hover::before {
+#nav-links > a:hover::before {
 	transform: scaleX(1);
 }
 
@@ -235,7 +216,7 @@ ul {
 		margin-bottom: 0.5rem;
 	}
 
-	#nav-links>a {
+	#nav-links > a {
 		width: min-content;
 	}
 

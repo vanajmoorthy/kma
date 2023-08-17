@@ -336,11 +336,17 @@ export default {
 }
 
 .about > div > p {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	/* line-height: 2rem; */
 	max-width: 450px;
 	margin: 2rem;
 	text-align: justify;
+}
+
+@media screen and (max-width: 898px) {
+	.about > div > p {
+		font-size: 1rem;
+	}
 }
 
 .fade-enter-active,
