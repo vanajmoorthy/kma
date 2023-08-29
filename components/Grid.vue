@@ -1,7 +1,10 @@
 <template>
     <div class="image-gallery">
         <div v-for="post in props.images" :key="post.id" class="image-item">
-            <img class="grid-img" :src="post.imageUrl" :style="{ height: post.height + 'px' }" alt="">
+            <p class="project-title">{{ post.title }}</p>
+            <nuxt-link :to="post.uid">
+                <img class="grid-img" :src="post.imageUrl" :style="{ height: post.height + 'px' }" alt="">
+            </nuxt-link>
         </div>
     </div>
 </template>
@@ -13,6 +16,15 @@ const props = defineProps({
 </script>
 
 <style scoped>
+.project-title {
+    position: absolute;
+    color: white;
+    bottom: 0px;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: calc(100% - 1rem);
+}
+
 .image-gallery {
     column-count: 4;
     margin-top: 0.5rem;
@@ -34,6 +46,7 @@ const props = defineProps({
     transition: transform 0.3s ease-in-out;
     /* background-color: white; */
     margin-bottom: 5px;
+    position: relative;
 }
 
 .image-item img {
@@ -44,6 +57,7 @@ const props = defineProps({
 
 .image-item:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 /* Negative margins to make images touch */

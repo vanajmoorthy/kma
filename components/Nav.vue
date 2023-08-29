@@ -1,5 +1,6 @@
 <template>
-	<nav :class="{ navexpand: isMenuOpen }">
+	<nav :class="{ navexpand: isMenuOpen }"
+		:style="{ backgroundColor: isIndexPage ? 'rgba(0,0,0,0.1)' : 'rgba(241, 234, 226, 0.3)' }">
 		<div id="home">
 			<h1>KM&A</h1>
 			<div class="hamburger" v-on="{ click: toggleMenu }" :class="{ open: isMenuOpen }">
@@ -8,16 +9,40 @@
 			</div>
 		</div>
 		<div id="nav-links" :class="{ expand: isMenuOpen }">
-			<NuxtLink class="nav-link link" to="/">Home</NuxtLink>
-			<NuxtLink class="nav-link link" to="/projects">Projects</NuxtLink>
-			<NuxtLink class="nav-link link" to="/about">About</NuxtLink>
-			<NuxtLink class="nav-link link" to="/awards">Awards</NuxtLink>
-			<NuxtLink class="nav-link link" to="/contact">Contact</NuxtLink>
+			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
+				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/">Home
+			</NuxtLink>
+			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
+				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/projects">
+				Projects</NuxtLink>
+			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
+				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/about">
+				About</NuxtLink>
+			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
+				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/awards">
+				Awards</NuxtLink>
+			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
+				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/contact">
+				Contact</NuxtLink>
 
 		</div>
 	</nav>
 </template>
 
+<script setup>
+import { ref } from 'vue';
+
+const router = useRouter();
+const route = useRoute();
+const isIndexPage = ref(route.name === 'index');
+
+router.beforeEach((to, from, next) => {
+	isIndexPage.value = to.name === 'index';
+	next();
+});
+
+
+</script>
 
 <script>
 export default {
@@ -68,7 +93,7 @@ nav {
 			rgba(0, 0, 0, 0.06) 80%,
 			rgba(0, 0, 0, 0) 100%);
 
-	/* backdrop-filter: blur(2px); */
+	backdrop-filter: blur(2px);
 	color: white;
 	transition: 0.2s ease background-color;
 }
@@ -87,7 +112,6 @@ ul {
 #nav-links > a {
 	text-decoration: none;
 	margin: 1rem;
-	color: white;
 	text-transform: uppercase;
 	position: relative;
 	font-family: "NeueHaas45";
@@ -105,13 +129,29 @@ ul {
 	height: 1px;
 	bottom: 0;
 	left: 0;
-	background-color: #fff;
+	background-color: var(--link-color);
 	transform: scaleX(0);
 	transition: transform 0.15s ease;
 }
 
 #nav-links > a:hover::before {
 	transform: scaleX(1);
+}
+
+#nav-links > a.white-link {
+	color: white;
+}
+
+#nav-links > a.black-link {
+	color: black;
+}
+
+#nav-links > a.white-link::before {
+	background-color: white;
+}
+
+#nav-links > a.black-link::before {
+	background-color: black;
 }
 
 #home {

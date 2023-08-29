@@ -20,4 +20,5 @@
 
 html {
 	font-family: "NeueHaas45";
+	overflow-y: scroll;
 }

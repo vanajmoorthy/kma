@@ -17,6 +17,7 @@
 main {
 	background-color: #f1eae2;
 	height: 100%;
+	min-height: 100vh;
 }
 
 .grid-img {
@@ -92,6 +93,8 @@ const subtypes = ["All Projects"];
 
 // Loop through each post in the 'posts' array
 for (const post of posts._rawValue) {
+	const uid = post.uid;
+	const title = post.data.title[0].text;
 	const subtype = post.data.subtype; // Get the subtype text
 	const imageUrl = post.data.image.url; // Get the image URL
 	const height = post.data.image.height;
@@ -106,14 +109,16 @@ for (const post of posts._rawValue) {
 	}
 
 	// Push the image URL to the appropriate subtype's array
-	subtypeImages[subtype].push({ height, imageUrl });
-	subtypeImages["All Projects"].push({ height, imageUrl });
+	subtypeImages[subtype].push({ height, imageUrl, title, uid });
+	subtypeImages["All Projects"].push({ height, imageUrl, title, uid });
+
 }
 
 // Now you have the subtypeImages object organized by subtypes with arrays of image URLs
 
 const list = ref(subtypeImages["All Projects"]);
 const current = ref("All Projects");
+
 
 function changeGrid(category) {
 	list.value = subtypeImages[category];

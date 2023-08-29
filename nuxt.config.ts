@@ -13,5 +13,14 @@ export default defineNuxtConfig({
 
   prismic: {
     endpoint: "kmanda",
+    apiOptions: {
+      routes: [
+        // Resolves Page documents to URLs like "/about" and "/blog"
+        {
+          type: 'page',
+          path: '/:uid',
+        },
+      ],
+    },
   },
 })
