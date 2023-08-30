@@ -74,6 +74,12 @@ main {
 .control-link {
 	text-decoration: none;
 }
+
+@media screen and (max-width: 650px) {
+	.control {
+		padding-top: 7rem;
+	}
+}
 </style>
 
 <script setup>

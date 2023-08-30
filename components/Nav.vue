@@ -1,28 +1,24 @@
 <template>
-	<nav :class="{ navexpand: isMenuOpen }"
-		:style="{ backgroundColor: isIndexPage ? 'rgba(0,0,0,0.1)' : 'rgba(241, 234, 226, 0.3)' }">
+	<nav :class="{ navexpand: isMenuOpen }" :style="{
+		backgroundColor: backgroundColor
+	}">
 		<div id="home">
-			<h1>KM&A</h1>
+			<h1 :style="getLinkStyles">KM&A</h1>
 			<div class="hamburger" v-on="{ click: toggleMenu }" :class="{ open: isMenuOpen }">
-				<div id="line1"></div>
-				<div id="line2"></div>
+				<div id="line1" :style="getLinkStyles"></div>
+				<div id="line2" :style="getLinkStyles"></div>
 			</div>
 		</div>
 		<div id="nav-links" :class="{ expand: isMenuOpen }">
-			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
-				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/">Home
+			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/">Home
 			</NuxtLink>
-			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
-				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/projects">
+			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/projects">
 				Projects</NuxtLink>
-			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
-				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/about">
+			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/about">
 				About</NuxtLink>
-			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
-				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/awards">
+			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/awards">
 				Awards</NuxtLink>
-			<NuxtLink class="nav-link link" :style="{ '--link-color': isIndexPage.value ? 'white' : 'black' }"
-				:class="{ 'white-link': isIndexPage, 'black-link': !isIndexPage }" to="/contact">
+			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/contact">
 				Contact</NuxtLink>
 
 		</div>
@@ -35,6 +31,37 @@ import { ref } from 'vue';
 const router = useRouter();
 const route = useRoute();
 const isIndexPage = ref(route.name === 'index');
+
+const backgroundColor = computed(() => {
+	// console.log
+	if (route.name === "index") {
+		return "rgba(0,0,0,0.1)"
+	} else if (route.name === "projects") {
+		return "rgba(241, 234, 226, 0.8)";
+	} else {
+		return "rgba(0,0,0,0.3)";
+	}
+});
+
+const getLinkStyles = computed(() => {
+	if (route.name === "index") {
+		return {
+			"--link-color": "white",
+			color: "white"
+		}
+	} else if (route.name === "projects") {
+		return {
+			"--link-color": "black",
+			color: "black"
+		}
+	} else {
+		// For project pages
+		return {
+			"--link-color": "white",
+			color: "white"
+		}
+	}
+});
 
 router.beforeEach((to, from, next) => {
 	isIndexPage.value = to.name === 'index';
@@ -94,7 +121,7 @@ nav {
 			rgba(0, 0, 0, 0) 100%);
 
 	backdrop-filter: blur(2px);
-	color: white;
+	/* color: white; */
 	transition: 0.2s ease background-color;
 }
 
@@ -138,13 +165,6 @@ ul {
 	transform: scaleX(1);
 }
 
-#nav-links > a.white-link {
-	color: white;
-}
-
-#nav-links > a.black-link {
-	color: black;
-}
 
 #nav-links > a.white-link::before {
 	background-color: white;
@@ -211,7 +231,7 @@ ul {
 #line2 {
 	height: 2px;
 	width: 100%;
-	background-color: white;
+	background-color: var(--link-color);
 	transition: 0.2s ease all;
 }
 
