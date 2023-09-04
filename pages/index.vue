@@ -19,7 +19,7 @@
 				<p>
 					Established in 1990, Kumar Moorthy & Associates is an award
 					winning partnership firm of architects and interior
-					designers based in Delhi. In the twenty nine years since
+					designers based in Delhi. In the three decades since
 					inception we have undertaken and successfully completed a
 					wide range of design works in the diverse fields of
 					residential design and interiors, institutional and hotel
@@ -33,28 +33,29 @@
 					<br />
 					<span class="hide2">
 						The firm has been honoured to receive awards in various
-						categories under the prestigious J.K. Architect of the Year
+						categories under the prestigious The I.I.A National Awards for Excellence
+						2018, J.K. Architect of the Year
 						Awards in 1995 and 1997, and the Indian Institute of
-						Interior Designers- MK Award 2004 & 2006, Best Office
-						Architecture India, Asia Pacific Property Awards
-						Architecture 2018, The I.I.A National Awards for Excellence
-						2018.
+						Interior Designers - MK Award 2004 & 2006, Best Office
+						Architecture India - Asia Pacific Property Awards
+						Architecture 2018.
 					</span>
 				</p>
 				<p class="hide">
 					We have executed projects in the diverse locations of Delhi
-					N.C.R including Noida , Gurgaon, Manesar & Bawal as also in
-					Agra, Mumbai, Indore (M.P.) and Kullu (H.P).
+					N.C.R including Noida, Gurgaon, Manesar & Bawal as also in
+					other diverse locations in India, ranging from Tier-2 cities to hill and rural locales.
 					<br /><br />
-					Recent notable projects by the firm span a diverse spectrum
+					Notable projects by the firm span a diverse spectrum
 					of concept, philosophy and materials and include an building
 					in the Indo Saracenic heritage campus of a 125 year old
 					public school in Indore and a low cost building using &
 					exemplifying alternative technology for a rehabilitation
-					centre in West Delhi for an NGO for disabled persons to a
-					factory for a large upcoming Indo American lighting JV in
-					Bawal, Haryana other than corporate office buildings &
-					interiors in Gurgaon & NOIDA and a small number of
+					centre in West Delhi for an NGO for disabled persons to an award winning corporate office building
+					embodying environmental concerns, a
+					factory for a large Indo-Scandanavian lighting brand in
+					Bawal, Haryana other than other corporate office buildings &
+					interiors in Indore, Gurgaon and NOIDA and a number of
 					significant residential projects including farmhouses.
 				</p>
 			</div>
@@ -220,13 +221,13 @@ export default {
 
 }
 
-#control > h1 {
+#control>h1 {
 	color: white;
 	font-size: 2rem;
 }
 
 @media screen and (max-width: 650px) {
-	#control > h1 {
+	#control>h1 {
 		opacity: 0;
 	}
 }
@@ -257,7 +258,7 @@ export default {
 	margin-left: 0.2rem;
 }
 
-#project-name > h3 {
+#project-name>h3 {
 	color: white;
 	font-size: 1.5rem;
 	display: flex;
@@ -274,7 +275,7 @@ export default {
 	height: 4rem;
 }
 
-#read-more > a {
+#read-more>a {
 	text-decoration: none;
 	color: white;
 	font-size: 1.5rem;
@@ -287,7 +288,7 @@ export default {
 }
 
 .project2 {
-	background: no-repeat url("@/assets/hero2.jpg");
+	background: no-repeat url("@/assets/m-residence.jpeg");
 }
 
 .project3 {
@@ -329,13 +330,13 @@ export default {
 	/* padding: 0 10rem; */
 }
 
-.about > div {
+.about>div {
 	display: flex;
 	/* max-width: 400px; */
 	padding: 1rem;
 }
 
-.about > div > p {
+.about>div>p {
 	font-size: 1.1rem;
 	/* line-height: 2rem; */
 	max-width: 450px;
@@ -344,7 +345,7 @@ export default {
 }
 
 @media screen and (max-width: 898px) {
-	.about > div > p {
+	.about>div>p {
 		font-size: 1rem;
 	}
 }
@@ -360,7 +361,7 @@ export default {
 }
 
 @media screen and (max-width:780px) {
-	.about > div > p {
+	.about>div>p {
 		/* margin: 1rem; */
 	}
 
@@ -378,11 +379,11 @@ export default {
 }
 
 @media screen and (max-width:680px) {
-	.about > div > p {
+	.about>div>p {
 		/* margin: 1rem; */
 	}
 
-	.about > div {
+	.about>div {
 		/* padding-left: 0rem;
 		padding-right: 0rem; */
 	}
@@ -399,7 +400,7 @@ export default {
 		/* top: calc(100vh - 7rem); */
 	}
 
-	.about > div {
+	.about>div {
 		flex-direction: column;
 		/* margin-bottom: 1rem; */
 	}
@@ -427,7 +428,7 @@ export default {
 		margin-top: 1.3rem;
 	}
 
-	#project-name > h3 {
+	#project-name>h3 {
 		font-size: 1.0rem;
 	}
 
@@ -445,7 +446,7 @@ export default {
 }
 
 @media screen and (max-width:420px) {
-	.about > div > p {
+	.about>div>p {
 		margin: 1rem;
 	}
 

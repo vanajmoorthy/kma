@@ -1,9 +1,127 @@
 <template>
-	<div>About</div>
+	<div class="container">
+		<main>
+			<h1>
+				“light, air & greenery”
+			</h1>
+			<p>
+				These three keywords could be said to be what we strive for in each design, with our attitude to
+				encompassing
+				a
+				respect for the client's brief - both programmatic as well as of the feel desired - but avoiding the merely
+				flamboyant or trendy in favour of lasting distinctive design & aesthetic values. Our deep commitment to
+				sustainability and climatic logic & aptness wherever possible and relevance to context anchors our approach
+				to
+				buildings we help create.
+			</p>
+		</main>
+		<section class="about">
+			<p>Established in 1990, Kumar Moorthy & Associates is an award winning partnership firm of architects and
+				interior
+				designers based in Delhi. In the three decades since inception we have undertaken and successfully completed
+				a
+				wide range of design works in the diverse fields of residential design and interiors, institutional and
+				hotel
+				design, commercial and office spaces and interiors. The clients for the above include notable industrial
+				groups,
+				private limited companies, charitable and non government organisations, government agencies and public
+				figures
+				other than private individuals.
+				<br>
+				<br>
+				The firm has been honoured to receive awards in various categories under the prestigious The I.I.A National
+				Awards for Excellence 2018, J.K. Architect of the Year Awards in 1995 and 1997, and the Indian Institute of
+				Interior Designers - MK Award 2004 & 2006, Best Office Architecture India - Asia Pacific Property Awards
+				Architecture 2018.
+			</p>
+
+			<p>We have executed projects in the diverse locations of Delhi N.C.R including Noida, Gurgaon, Manesar & Bawal
+				as
+				also in other diverse locations in India, ranging from Tier-2 cities to hill and rural locales.
+				<br><br>
+				Notable projects by the firm span a diverse spectrum of concept, philosophy and materials and include an
+				building in the Indo Saracenic heritage campus of a 125 year old public school in Indore and a low cost
+				building
+				using & exemplifying alternative technology for a rehabilitation centre in West Delhi for an NGO for
+				disabled
+				persons to an award winning corporate office building embodying environmental concerns, a factory for a
+				large
+				Indo-Scandanavian lighting brand in Bawal, Haryana other than other corporate office buildings & interiors
+				in
+				Indore, Gurgaon and NOIDA and a number of significant residential projects including farmhouses.
+			</p>
+		</section>
+	</div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+	background-color: #b79775;
+	color: white;
+	min-height: calc(100vh - 4rem);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
+}
+
+main {
+	padding-top: 6rem;
+	text-align: center;
+}
+
+h1 {
+	margin-bottom: 1rem;
+}
+
+main>p {
+	margin: auto;
+	max-width: 800px;
+}
+
+.about {
+	display: flex;
+	margin-top: 4rem;
+	padding: 4rem;
+	justify-content: center;
+}
+
+.about>p {
+	width: 40%;
+	margin: 0 2rem;
+	text-align: justify;
+}
+
+@media screen and (max-width: 900px) {
+
+	.about>p {
+		width: 50%;
+		margin: 0 1rem;
+
+	}
+
+}
+
+@media screen and (max-width: 770px) {
+	main {
+		padding-top: 8rem;
+	}
+
+	.about {
+		flex-direction: column;
+		padding: 0;
+	}
+
+	.about>p {
+		width: 100%;
+		margin: 0;
+
+	}
+
+}
+</style>
