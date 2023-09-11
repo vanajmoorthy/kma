@@ -312,7 +312,6 @@ export default {
 	display: flex;
 	align-items: center;
 	font-size: 1.5rem;
-	width: 241px;
 }
 
 .right-arrow {
