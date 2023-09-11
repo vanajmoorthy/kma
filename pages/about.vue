@@ -1,7 +1,25 @@
 <template>
 	<div class="container">
+
 		<main>
-			<h1>
+			<h1 id="principals">Principal Architects</h1>
+			<section class="partners">
+				<div class="partner-one">
+					<h2>Narayan Moorthy</h2>
+					<img src="../assets/nm1.webp" alt="Narayan Moorthy image">
+					<p>Schooling: The Daly College, Indore</p>
+					<p>Professional Qualifications: B.Arch. from School of Architecture, Institute of Environmental Design,
+						Vallabh Vidyanagar, Gujarat.</p>
+				</div>
+				<div class="partner-two">
+					<h2>Mallika Kumar</h2>
+					<img src="../assets/mk1.jpeg" alt="Mallika Kumar image">
+					<p>Schooling: The Lawrence School, Sanawar</p>
+					<p>Professional Qualifications: B.Arch. from School of Architecture, Institute of Environmental Design,
+						Vallabh Vidyanagar, Gujarat.</p>
+				</div>
+			</section>
+			<h1 class="light">
 				“light, air & greenery”
 			</h1>
 			<p>
@@ -51,6 +69,7 @@
 				Indore, Gurgaon and NOIDA and a number of significant residential projects including farmhouses.
 			</p>
 		</section>
+
 	</div>
 </template>
 
@@ -59,6 +78,53 @@ export default {};
 </script>
 
 <style scoped>
+#principals {
+	margin-top: 2rem;
+}
+
+.light {
+	margin-top: 6rem;
+}
+
+.partners {
+	display: flex;
+	margin-top: 2rem;
+}
+
+.partners>div>h2 {
+	margin-bottom: 1rem;
+}
+
+.partners>div>img {
+	margin-bottom: 0.5rem;
+}
+
+.partners>div>p {
+	text-align: center;
+	margin-bottom: 0.5rem;
+	font-style: italic;
+	font-size: 0.9rem;
+
+}
+
+.partners>div {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 1rem;
+	max-width: 400px;
+}
+
+.partners>div>img {
+	width: 200px;
+	height: 200px;
+
+	border-radius: 500px;
+	object-fit: cover;
+
+}
+
 .container {
 	background-color: #b79775;
 	color: white;
@@ -123,5 +189,11 @@ main>p {
 
 	}
 
+}
+
+@media screen and (max-width: 470px) {
+	.partners {
+		flex-direction: column;
+	}
 }
 </style>

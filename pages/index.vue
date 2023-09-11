@@ -3,13 +3,15 @@
 		<div id="title-holder">
 			<div id="spacer">g</div>
 			<div id="control">
-				<h1>KM&A</h1>
+				<h1>K M & A</h1>
 				<img class="down-arrow" src="@/assets/down.png" alt="down arrow" @click="scrollToNextSection" />
 			</div>
 			<div id="project-name">
 				<transition name="fade">
-					<h3 key="projectName">{{ currentProject }} <img class="right-arrow" src="@/assets/forward.png"
-							alt="View project" /> </h3>
+					<NuxtLink class="page-link" :to="currentLink">
+						<h3 key="projectName">{{ currentProject }} <img class="right-arrow" src="@/assets/forward.png"
+								alt="View project" /> </h3>
+					</NuxtLink>
 				</transition>
 			</div>
 		</div>
@@ -75,8 +77,9 @@ export default {
 		return {
 			loaded: false,
 			currentSection: 0,
-			projectNames: ['Magnolia Home', 'Read more', 'G Residence', 'Farmhouse', 'Creative Office', 'Footer'],
-			currentProject: 'Courtyard Home',
+			projectNames: ['Creative', 'Read more', 'House of Courtyards', 'House of Frames', 'Atrium Home', 'Footer'],
+			currentProject: 'Creative',
+			currentLink: 'creative',
 			sections: []
 		};
 	},
@@ -90,6 +93,17 @@ export default {
 					if (this.currentSection !== i) {
 						this.currentSection = i;
 						this.currentProject = this.projectNames[i];
+						if (this.currentProject == "Creative") {
+							this.currentLink = "creative";
+						} else if (this.currentProject == "Read more") {
+							this.currentLink = "about";
+						} else if (this.currentProject == "House of Courtyards") {
+							this.currentLink = "gfarmhousee";
+						} else if (this.currentProject == "House of Frames") {
+							this.currentLink = "m-residence-2-gurgaon";
+						} else if (this.currentProject == "Atrium Home") {
+							this.currentLink = "k-residence-2";
+						}
 					}
 					break;
 				}
@@ -166,6 +180,7 @@ export default {
 <style scoped>
 #footer {
 	position: relative;
+	z-index: 5;
 	/* top: -7rem; */
 	/* margin-bottom: -7rem; */
 }
@@ -179,6 +194,18 @@ export default {
 	z-index: 1;
 	transition: 0.2s ease opacity;
 	margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 560px) {
+	.page-link>h3 {
+		font-size: 1.2rem !important;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	#title-holder {
+		top: calc(100vh - 9rem);
+	}
 }
 
 .container {
@@ -230,11 +257,31 @@ export default {
 	#control>h1 {
 		opacity: 0;
 	}
+
+	.project1 {
+		background: no-repeat url("@/assets/creative-mobile.png") !important;
+		background-size: cover !important;
+	}
+
+	.project2 {
+		background: no-repeat url("@/assets/courtyards-mobile.png") !important;
+		background-size: cover !important;
+	}
+
+	.project3 {
+		background: no-repeat url("@/assets/frames-mobile.png") !important;
+		background-size: cover !important;
+	}
+
+	.project4 {
+		background: no-repeat url("@/assets/atrium-mobile.png") !important;
+		background-size: cover !important;
+	}
 }
 
 #project-name,
 #spacer {
-	min-width: 200px;
+	min-width: 241px;
 	/* margin: 0 1rem; */
 }
 
@@ -250,6 +297,22 @@ export default {
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;
+}
+
+.page-link {
+	text-decoration: none;
+	color: white;
+	width: 241px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.page-link>h3 {
+	display: flex;
+	align-items: center;
+	font-size: 1.5rem;
+	width: 241px;
 }
 
 .right-arrow {
@@ -284,19 +347,19 @@ export default {
 }
 
 .project1 {
-	background: no-repeat url("@/assets/hero1.jpg");
+	background: no-repeat url("@/assets/creative.jpg");
 }
 
 .project2 {
-	background: no-repeat url("@/assets/m-residence.jpeg");
+	background: no-repeat url("@/assets/courtyards.jpg");
 }
 
 .project3 {
-	background: no-repeat url("@/assets/hero3.jpg");
+	background: no-repeat url("@/assets/frames.jpg");
 }
 
 .project4 {
-	background: no-repeat url("@/assets/hero4.jpg");
+	background: no-repeat url("@/assets/atrium.jpg");
 }
 
 .project1,
@@ -415,6 +478,10 @@ export default {
 	#spacer,
 	#project-name {
 		min-width: 0px;
+	}
+
+	.page-link>h3 {
+		width: min-content;
 	}
 
 	#spacer,
