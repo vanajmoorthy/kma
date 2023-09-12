@@ -1,11 +1,11 @@
 <template>
 	<main>
 		<h1>Awards</h1>
-		<ol>
+		<ol class="awards">
 			<li>WINNER IIA NATIONAL AWARDS FOR EXCELLENCE IN ARCHITECTURE 2018,
 				by Indian Institute of Architects in the category "Commercial", for a Corporate Office in Gurgaon.</li>
 			<li>BEST OFFICE ARCHITECTURE INDIA, ASIA PACIFIC PROPERTY AWARDS ARCHITECTURE,
-				in the category "Commercial", for a Corporate Office in Gurgaon.</li>
+				in the category "Commercial", for a Corporate Office in Gurgaon, 2019 - 2020.</li>
 			<li>CERTIFICATE OF MERIT, J.K. ARCHITECT OF THE YEAR AWARDS 1995
 				in the category “Private Residences” for a residence in Delhi.</li>
 			<li>COMMENDATION AWARD, J.K. ARCHITECT OF THE YEAR AWARDS 1997
@@ -16,9 +16,7 @@
 			<li>1st RUNNER UP in 10TH IIID-MK AWARDS 2006 (Institute of Indian Interior Designers)
 				in the category “ Residential - Small” to Mallika Kumar for a residence in Delhi.</li>
 			<li>WINNER OF HOUZZ,
-				best of 2020, 2019, 2018, 2017, 2016</li>
-			<li>WINNER OF HOUZZ
-				best of 2020 in the category design.</li>
+				best of 2022, 2021, 2020, 2019, 2018, 2017, 2016</li>
 		</ol>
 		<h1>Bibliography</h1>
 		<p>Our works have been quite extensively featured in the Indian architectural magazine media.</p>
@@ -93,10 +91,27 @@ main {
 	padding-top: 5rem;
 	background-color: #f1eae2;
 
-	width: 100%;
+	/* width: 100%; */
 	min-height: 100vw;
 	padding: 8rem 2rem 2rem 2rem;
 	overflow-x: none;
+}
+
+.awards>li:not(:last-child) {
+	border-bottom: 1px solid black;
+}
+
+
+.awards>li {
+	padding: 0.5rem 0rem;
+}
+
+.awards>li:last-child {
+	border-bottom: 1px solid black;
+}
+
+.awards>li:first-child {
+	border-top: 1px solid black;
 }
 
 h1 {

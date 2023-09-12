@@ -9,14 +9,16 @@
 			<div id="project-name">
 				<transition name="fade">
 					<NuxtLink class="page-link" :to="currentLink">
-						<h3 key="projectName">{{ currentProject }} <img class="right-arrow" src="@/assets/forward.png"
-								alt="View project" /> </h3>
+						<h3 key="projectName">{{ currentProject }}</h3>
+						<img class="right-arrow" src="@/assets/forward.png" alt="View project" />
 					</NuxtLink>
 				</transition>
 			</div>
 		</div>
 		<div class="project1" ref="section1"></div>
 		<div class="about" ref="section2">
+			<h1>Kumar Moorthy and Associates</h1>
+			<h2>Architects and Interior Designers</h2>
 			<div>
 				<p>
 					Established in 1990, Kumar Moorthy & Associates is an award
@@ -77,8 +79,8 @@ export default {
 		return {
 			loaded: false,
 			currentSection: 0,
-			projectNames: ['Creative', 'Read more', 'House of Courtyards', 'House of Frames', 'Atrium Home', 'Footer'],
-			currentProject: 'Creative',
+			projectNames: ['Corporate Office - Creative Travels', 'Read more', 'House of Courtyards', 'House of Frames', 'Atrium Home', 'Footer'],
+			currentProject: 'Corporate Office - Creative Travels',
 			currentLink: 'creative',
 			sections: []
 		};
@@ -93,7 +95,7 @@ export default {
 					if (this.currentSection !== i) {
 						this.currentSection = i;
 						this.currentProject = this.projectNames[i];
-						if (this.currentProject == "Creative") {
+						if (this.currentProject == "Corporate Office - Creative Travels") {
 							this.currentLink = "creative";
 						} else if (this.currentProject == "Read more") {
 							this.currentLink = "about";
@@ -183,6 +185,22 @@ export default {
 	z-index: 5;
 	/* top: -7rem; */
 	/* margin-bottom: -7rem; */
+}
+
+.about>h1 {
+	font-family: "NeueHaas45Bold";
+	margin-bottom: 0.5rem;
+	text-align: center;
+
+}
+
+.about>h2 {
+	font-style: italic;
+	font-family: "NeueHaas45";
+	font-size: 1.2rem;
+	/* font-weight: 100; */
+	text-align: center;
+
 }
 
 #title-holder {
@@ -297,15 +315,27 @@ export default {
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;
+	width: 241px;
+	transition: 0.2s ease all;
+}
+
+.right-arrow {
+	transition: 0.2s ease all;
+}
+
+#project-name:hover .right-arrow {
+	transform: translateX(5px);
+}
+
+#project-name:hover {
+	opacity: 0.8;
 }
 
 .page-link {
 	text-decoration: none;
 	color: white;
-	width: 241px;
 	display: flex;
-	align-items: flex-end;
-	justify-content: flex-end;
+	align-items: center;
 }
 
 .page-link>h3 {
@@ -388,6 +418,7 @@ export default {
 	scroll-snap-align: start;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 	/* padding: 0 10rem; */
 }
@@ -402,7 +433,7 @@ export default {
 	font-size: 1.1rem;
 	/* line-height: 2rem; */
 	max-width: 450px;
-	margin: 2rem;
+	margin: 1rem 2rem 2rem 2rem;
 	text-align: justify;
 }
 

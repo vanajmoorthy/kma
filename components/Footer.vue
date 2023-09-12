@@ -2,8 +2,11 @@
     <footer id="footer">
         <div class="col1">
             <p id="copyright">© Kumar Moorthy & Associates 2023</p>
-            <a href="https://www.instagram.com/kumar.moorthy.architects/">Instagram</a>
-            <a href="mailto:office@kumarmoorthy.com">Email</a>
+            <a target="_blank" rel="noopener noreferrer"
+                href="https://www.instagram.com/kumar.moorthy.architects/">Instagram</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/kumarmoorthyassociates">Facebook</a>
+            <a target="_blank" rel="noopener noreferrer" href="mailto:office@kumarmoorthy.com">Email</a>
+
         </div>
         <div class="col2">
             <p>C-9, 9250,</p>

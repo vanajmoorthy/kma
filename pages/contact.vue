@@ -9,18 +9,23 @@
 					New Delhi 110070, India</p>
 
 				<h3>Telephone</h3>
-				<p>+011 41767501</p>
-				<p>+011 40044887</p>
-				<p>+011 40044888</p>
+				<div class="telephone">
+					<a target="_blank" rel="noopener noreferrer" href="+91 (11) 41767501">+91 (11) 41767501</a>
+					<a target="_blank" rel="noopener noreferrer" href="+91 (11) 40044887">+91 (11) 40044887"</a>
+					<a target="_blank" rel="noopener noreferrer" href="+91 (11) 40044888">+91 (11) 40044888</a>
+				</div>
 
 				<h3>Email Address</h3>
-				<a href="mailto:office@kumarmoorthy.com">office@kumarmoorthy.com</a>
+				<a target="_blank" rel="noopener noreferrer"
+					href="mailto:office@kumarmoorthy.com">office@kumarmoorthy.com</a>
 			</div>
 			<div class="follow-us">
 				<h2>Follow Us</h2>
 
-				<a href="">Instagram</a>
-				<a href="">Facebook</a>
+				<a target="_blank" rel="noopener noreferrer"
+					href="https://www.instagram.com/kumar.moorthy.architects/">Instagram</a>
+				<a target="_blank" rel="noopener noreferrer"
+					href="https://www.facebook.com/kumarmoorthyassociates">Facebook</a>
 			</div>
 		</div>
 
@@ -56,6 +61,11 @@ main>div {
 	display: flex;
 	flex-direction: column;
 	margin: 1rem;
+}
+
+.telephone {
+	display: flex;
+	flex-direction: column;
 }
 
 .contact-us {
