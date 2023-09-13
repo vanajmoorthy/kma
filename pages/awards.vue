@@ -79,6 +79,33 @@
 		<p>& many other features in Outlook, Outlook City Limits, Good Housekeeping, Design Matrix, Home & Design Trends,
 			Home Review, Elle Decore, Society Interior, Inside Outside, & other magazines cover various projects completed
 			by the firm.</p>
+
+		<h1>Online Publications</h1>
+		<ol>
+			<li>
+				<a target="_blank" rel="noopener noreferrer"
+					href="https://www.architectandinteriorsindia.com/projects/10135-sagarika-villa-is-a-mix-of-traditional-balinese-architecture-with-some-indian-ele</a>
+				ments">architectandinteriorsindia.com/projects/10135-sagarika-villa-is-a-mix-of-traditional-balinese-architecture-with-some-indian-elements</a>
+			</li>
+			<li><a target="_blank" rel="noopener noreferrer"
+					href="https://www.architecturaldigest.in/gallery/a-vintage-close-to-nature-bali-home/">architecturaldigest.in/gallery/a-vintage-close-to-nature-bali-home</a>
+			</li>
+			<li><a target="_blank" rel="noopener noreferrer"
+					href="https://www.architecturaldigest.in/content/bali-holiday-villa-the-indoors-and-outdoors-are-two-halves-of-a-whole-inte</a>
+				rior/">architecturaldigest.in/content/bali-holiday-villa-the-indoors-and-outdoors-are-two-halves-of-a-whole-interior</a>
+
+			</li>
+			<li><a target="_blank" rel="noopener noreferrer" href="https://www.re-thinkingthefuture.com/designing-for-typologies/a4233-15-beautiful-vintage-apartments-around-the-w</a>
+				orld/">re-thinkingthefuture.com/designing-for-typologies/a4233-15-beautiful-vintage-apartments-around-the-world</a>
+
+			</li>
+			<li><a target="_blank" rel="noopener noreferrer"
+					href="https://www.architectandinteriorsindia.com/projects/10549-designing-a-creative-office">architectandinteriorsindia.com/projects/10549-designing-a-creative-office</a>
+			</li>
+			<li><a target="_blank" rel="noopener noreferrer"
+					href="https://www.indiadesignworld.com/in-the-green/">indiadesignworld.com/in-the-green</a>
+			</li>
+		</ol>
 	</main>
 </template>
 
@@ -95,6 +122,10 @@ main {
 	min-height: 100vw;
 	padding: 8rem 2rem 2rem 2rem;
 	overflow-x: none;
+}
+
+a {
+	color: black;
 }
 
 .awards>li:not(:last-child) {

@@ -26,6 +26,9 @@
 					href="https://www.instagram.com/kumar.moorthy.architects/">Instagram</a>
 				<a target="_blank" rel="noopener noreferrer"
 					href="https://www.facebook.com/kumarmoorthyassociates">Facebook</a>
+				<h2 class="houzz"><a target="_blank" rel="noopener noreferrer"
+						href="https://www.houzz.in/professionals/architects-and-building-designers/kumar-moorthy-and-associates-pfvwin-pf~1635884599"><span>Houzz
+							<img src="@/assets/houzz green.png" alt="houzz logo"></span></a></h2>
 			</div>
 		</div>
 
@@ -35,9 +38,10 @@
 			<h2>Find Us</h2>
 			<iframe
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d65284310.40083278!2d-49.62903793001729!3d2.9199994830325933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1c33c65d9c4f%3A0x24ee13ab8bdd67ea!2sKumar%20Moorthy%20%26%20Associates!5e0!3m2!1sen!2suk!4v1694441189630!5m2!1sen!2suk"
-				width="450" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+				width="470" height="340" style="border:0;" allowfullscreen="" loading="lazy"
 				referrerpolicy="no-referrer-when-downgrade"></iframe>
 		</div>
+
 	</main>
 </template>
 
@@ -101,8 +105,42 @@ a {
 
 a:hover {
 	opacity: 0.7;
-
 }
+
+span {
+	color: white;
+	background-color: #6cb93c;
+	display: flex;
+	align-items: center;
+	margin-left: 0.1rem;
+	margin-top: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 8px;
+	font-family: "NeueHaas45Bold";
+	transition: 0.2s ease all;
+	font-size: 1rem;
+}
+
+span:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.houzz {
+	display: flex;
+	align-items: center;
+}
+
+.houzz>a {
+	text-decoration: none;
+}
+
+span>img {
+	width: 24px;
+	margin-left: 0.5rem;
+}
+
+
 
 @media screen and (max-width: 790px) {
 	main {

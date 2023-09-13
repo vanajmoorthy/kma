@@ -17,7 +17,7 @@
 			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/about">
 				About</NuxtLink>
 			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/awards">
-				Awards</NuxtLink>
+				Awards & Publications</NuxtLink>
 			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/contact">
 				Contact</NuxtLink>
 
@@ -136,7 +136,7 @@ ul {
 	background-color: black;
 }
 
-#nav-links > a {
+#nav-links>a {
 	text-decoration: none;
 	margin: 1rem;
 	text-transform: uppercase;
@@ -148,7 +148,7 @@ ul {
 
 }
 
-#nav-links > a::before {
+#nav-links>a::before {
 	content: "";
 	position: absolute;
 	display: block;
@@ -161,16 +161,16 @@ ul {
 	transition: transform 0.15s ease;
 }
 
-#nav-links > a:hover::before {
+#nav-links>a:hover::before {
 	transform: scaleX(1);
 }
 
 
-#nav-links > a.white-link::before {
+#nav-links>a.white-link::before {
 	background-color: white;
 }
 
-#nav-links > a.black-link::before {
+#nav-links>a.black-link::before {
 	background-color: black;
 }
 
@@ -276,7 +276,7 @@ ul {
 		margin-bottom: 0.5rem;
 	}
 
-	#nav-links > a {
+	#nav-links>a {
 		width: min-content;
 	}
 

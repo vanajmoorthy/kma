@@ -69,7 +69,9 @@
 				Indore, Gurgaon and NOIDA and a number of significant residential projects including farmhouses.
 			</p>
 		</section>
-
+		<h2 class="houzz">Follow us on <a target="_blank" rel="noopener noreferrer"
+				href="https://www.houzz.in/professionals/architects-and-building-designers/kumar-moorthy-and-associates-pfvwin-pf~1635884599"><span>Houzz
+					<img src="@/assets/houzz green.png" alt="houzz logo"></span></a></h2>
 	</div>
 </template>
 
@@ -78,6 +80,37 @@ export default {};
 </script>
 
 <style scoped>
+span {
+	color: white;
+	background-color: #6cb93c;
+	display: flex;
+	align-items: center;
+	margin-left: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 8px;
+	font-family: "NeueHaas45Bold";
+	transition: 0.2s ease all;
+}
+
+span:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.houzz {
+	display: flex;
+	align-items: center;
+}
+
+.houzz>a {
+	text-decoration: none;
+}
+
+span>img {
+	width: 24px;
+	margin-left: 0.5rem;
+}
+
 #principals {
 	margin-top: 2rem;
 }
