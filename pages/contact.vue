@@ -10,9 +10,9 @@
 
 				<h3>Telephone</h3>
 				<div class="telephone">
-					<a target="_blank" rel="noopener noreferrer" href="+91 (11) 41767501">+91 (11) 41767501</a>
-					<a target="_blank" rel="noopener noreferrer" href="+91 (11) 40044887">+91 (11) 40044887"</a>
-					<a target="_blank" rel="noopener noreferrer" href="+91 (11) 40044888">+91 (11) 40044888</a>
+					<a target="_blank" rel="noopener noreferrer" href="tel: +91 (11) 41767501">+91 (11) 41767501</a>
+					<a target="_blank" rel="noopener noreferrer" href="tel: +91 (11) 40044887">+91 (11) 40044887</a>
+					<a target="_blank" rel="noopener noreferrer" href="tel: +91 (11) 40044888">+91 (11) 40044888</a>
 				</div>
 
 				<h3>Email Address</h3>
