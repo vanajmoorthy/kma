@@ -74,6 +74,16 @@
 </template>
 
 <script>
+useSeoMeta({
+	title: 'Kumar Moorthy & Associates',
+	ogTitle: 'Kumar Moorthy & Associates',
+	description: 'Award winning partnership firm of architects and interior designers based in Delhi.',
+	ogDescription: 'Award winning partnership firm of architects and interior designers based in Delhi.',
+})
+</script>
+
+
+<script>
 export default {
 	data() {
 		return {
