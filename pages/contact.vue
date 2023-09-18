@@ -28,7 +28,7 @@
 					href="https://www.facebook.com/kumarmoorthyassociates">Facebook</a>
 				<h2 class="houzz"><a target="_blank" rel="noopener noreferrer"
 						href="https://www.houzz.in/professionals/architects-and-building-designers/kumar-moorthy-and-associates-pfvwin-pf~1635884599"><span>Houzz
-							<img src="@/assets/houzz green.png" alt="houzz logo"></span></a></h2>
+							<img src="@/assets/houzz-green.png" alt="houzz logo"></span></a></h2>
 			</div>
 		</div>
 
