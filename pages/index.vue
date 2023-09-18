@@ -73,7 +73,7 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 useSeoMeta({
 	title: 'Kumar Moorthy & Associates',
 	ogTitle: 'Kumar Moorthy & Associates',
