@@ -19,7 +19,9 @@
                         viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
                         <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
                     </svg></button>
-                <img :src="image" />
+                <div class="direct-img-holder">
+                    <img :src="image" />
+                </div>
                 <button id="right" @click="next"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                         viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
                         <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
@@ -158,7 +160,7 @@ main {
     justify-content: center;
 }
 
-.image-holder>img {
+.direct-img-holder>img {
     max-width: 90%;
 }
 
@@ -270,6 +272,13 @@ main {
 
 }
 
+.direct-img-holder {
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    
+}
+
 @media screen and (max-width: 1040px) {
     .details {
         flex-direction: column-reverse;
@@ -284,7 +293,7 @@ main {
         margin-left: 0;
     }
 
-    .image-holder>img {
+    .direct-img-holder>img {
         max-width: 70%;
     }
 }
@@ -296,6 +305,20 @@ main {
 
     .details {
         padding: 2rem;
+    }
+
+    #left,
+    #right {
+        margin: 0rem;
+    }
+
+    .direct-img-holder {
+        width: 100vw;
+    }
+
+    .direct-img-holder>img {
+        max-width: 90%;
+        border: 1px solid white;
     }
 }
 </style>
