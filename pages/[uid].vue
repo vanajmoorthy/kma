@@ -47,11 +47,14 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'; // Assuming you might need onBeforeUnmount if you re-add onClickOutside
+import { usePrismic, useRoute, useAsyncData, createError, useSeoMeta } from '#imports'; // Or specific imports
 
 const { client } = usePrismic();
 const route = useRoute();
 
-const { data: page } = await useAsyncData("project", async () => {
+const { data: page } = await useAsyncData(`project-${route.params.uid}`, async () => {
+    // It's good practice to make the key for useAsyncData unique, e.g., by including UID
     const document = await client.getByUID("project", route.params.uid);
 
     if (document) {
@@ -59,55 +62,100 @@ const { data: page } = await useAsyncData("project", async () => {
     } else {
         throw createError({ statusCode: 404, message: "Page not found" });
     }
-
 });
 
-let data = page._rawValue.data;
-let description = page._rawValue.data.description;
+// Graceful handling if page data somehow isn't loaded, though createError should prevent this.
+if (!page.value || !page.value.data) {
+    // This situation should ideally be handled by the error thrown above.
+    // If execution reaches here, it's an unexpected state.
+    console.error("Project data is not available after fetch.");
+    // You might want to throw an error or set default empty values for prismicDocData and description
+    // to prevent further errors, though Nuxt's error page should take over from createError.
+}
+
+// Use .value to access Ref data in <script setup>
+const prismicDocData = page.value?.data || {}; // Provide a default empty object if data is null/undefined
+const description = prismicDocData.description || []; // Default to empty array for Prismic RichText/Title
 
 let imageUrls = [];
 
-for (const key in data) {
-    if (data[key].url) {
-        imageUrls.push(data[key].url);
+// Iterate over all fields in the document's data object
+for (const key in prismicDocData) {
+    const field = prismicDocData[key];
+    // **THE FIX IS HERE:**
+    // 1. Check if 'field' (prismicDocData[key]) is truthy (not null, undefined).
+    // 2. Check if 'field' is an object (Prismic image fields are objects).
+    // 3. Check if 'field.url' is truthy (has a value).
+    // 4. Check if 'field.url' is a string.
+    if (field && typeof field === 'object' && field.url && typeof field.url === 'string') {
+        imageUrls.push(field.url);
     }
 }
 
-const images = imageUrls;
+const images = imageUrls; // This is a non-reactive copy. Fine if imageUrls is populated once.
 
-const index = ref(0);
-const image = ref(images[0]);
+const index = ref(0); // For modal's current image index
+// Safer initialization for 'image' ref, in case 'images' array is empty
+const image = ref(images.length > 0 ? images[0] : ''); // The URL for the modal's current image
 
 let displayModal = ref(false);
 
-const displayModall = (isOpen, imageIndex = 0) => {
+const displayModall = (isOpen, imageIdx = 0) => { // Renamed param to avoid conflict with 'index' ref
     if (isOpen) {
-        index.value = imageIndex;
-        image.value = images[index.value];
+        if (images.length > 0 && imageIdx >= 0 && imageIdx < images.length) {
+            index.value = imageIdx;
+            image.value = images[index.value]; // Use the ref 'index.value'
+            displayModal.value = true;
+        } else {
+            console.warn("Cannot display modal: no images available or invalid index provided.");
+            displayModal.value = false;
+        }
+    } else {
+        displayModal.value = false;
     }
-    displayModal.value = isOpen;
 };
 
 const next = () => {
+    if (images.length === 0) return; // Guard clause for empty images array
     index.value = (index.value + 1) % images.length;
     image.value = images[index.value];
 };
 
 const prev = () => {
+    if (images.length === 0) return; // Guard clause
     index.value = (index.value - 1 + images.length) % images.length;
     image.value = images[index.value];
 };
 
-const onClickOutside = (e) => {
-    if (e.target.localName !== "button") {
-        displayModal.value = false;
-    }
-};
+// const onClickOutside = (e) => { // If you re-enable this
+//     if (e.target.localName !== "button" && e.target.closest('#modal .direct-img-holder') === null) {
+//         displayModal.value = false;
+//     }
+// };
 
-onMounted(() => {
-    // window.addEventListener("click", onClickOutside);
-});
+// onMounted(() => {
+//     // window.addEventListener("click", onClickOutside);
+// });
+// onBeforeUnmount(() => { // Always clean up global event listeners
+//     // window.removeEventListener("click", onClickOutside);
+// });
 
+// SEO Meta (ensure page.value and page.value.data are checked)
+if (page.value && page.value.data) {
+    const titleText = page.value.data.title && page.value.data.title[0] ? page.value.data.title[0].text : 'Project';
+    // Assuming you might have a specific meta_description field in Prismic.
+    const metaDesc = (Array.isArray(page.value.data.description) && page.value.data.description[0]?.text) ?
+                     page.value.data.description[0].text.substring(0, 155) : // Simple truncation for example
+                     'View project details.';
+
+    useSeoMeta({
+        title: titleText,
+        ogTitle: titleText,
+        description: metaDesc,
+        ogDescription: metaDesc,
+        ogImage: page.value.data.image && page.value.data.image.url ? page.value.data.image.url : '',
+    });
+}
 </script>
 
 
@@ -209,7 +257,6 @@ main {
 
 .description {
     margin-left: 1rem;
-    text-align: justify;
 }
 
 .description>p {
@@ -217,6 +264,8 @@ main {
     margin-top: 0.2rem;
     font-family: "NeueHaas45";
     font-size: 1rem;
+
+    text-align: justify;
 }
 
 .description>h3 {
@@ -322,3 +371,4 @@ main {
     }
 }
 </style>
+    

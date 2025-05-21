@@ -1,4 +1,4 @@
-<template>
+  <template>
 	<div class="container" :class="{ 'is-loaded': loaded }">
 		<div id="title-holder">
 			<div id="spacer">g</div>
@@ -64,6 +64,8 @@
 				</p>
 			</div>
 		</div>
+
+    <div class="project-aravali" ref="aravaliSection"></div>
 		<div class="project2" ref="section3"></div>
 		<div class="project3" ref="section4"></div>
 		<div class="project4" ref="section5"></div>
@@ -89,7 +91,7 @@ export default {
 		return {
 			loaded: false,
 			currentSection: 0,
-			projectNames: ['Corporate Office - Creative Travels', 'Read more', 'House of Courtyards', 'House of Frames', 'Atrium Home', 'Footer'],
+			projectNames: ['Corporate Office - Creative Travels', 'Read more', 'Aravali Expanse', 'House of Courtyards', 'House of Frames', 'Atrium Home', 'Footer'],
 			currentProject: 'Corporate Office - Creative Travels',
 			currentLink: 'creative',
 			sections: []
@@ -109,7 +111,10 @@ export default {
 							this.currentLink = "creative";
 						} else if (this.currentProject == "Read more") {
 							this.currentLink = "about";
-						} else if (this.currentProject == "House of Courtyards") {
+
+            } else if (this.currentProject == "Aravali Expanse") {
+              this.currentLink = "aravali-expanse"
+            }else if (this.currentProject == "House of Courtyards") {
 							this.currentLink = "gfarmhousee";
 						} else if (this.currentProject == "House of Frames") {
 							this.currentLink = "m-residence-2-gurgaon";
@@ -143,39 +148,88 @@ export default {
 			}
 
 			document.querySelector("#title-holder").style.opacity = opacity;
-			console.log("updated")
 		},
-		scrollToNextSection() {
-			this.currentSection++;
 
-			const sections = ["section1", "section2", "section3", "section4", "section5", "section6"];
+    scrollToNextSection() {
+        this.currentSection++;
 
-			// check if we're at the end of the sections, if so, reset to 0
+        const sectionRefNames = ["section1", "section2", "aravaliSection", "section3", "section4", "section5", "section6"];
 
+        // Check if we're at the end of the sections, if so, reset to 0 (cycling behavior)
+        if (this.currentSection >= sectionRefNames.length) {
+            this.currentSection = 0;
+        }
 
-			// scroll to the section
-			this.$refs[sections[this.currentSection]].scrollIntoView({
-				behavior: "smooth",
-			});
-		},
+        // Update currentProject and currentLink immediately when arrow is clicked
+        this.currentProject = this.projectNames[this.currentSection];
+        if (this.currentProject == "Corporate Office - Creative Travels") {
+            this.currentLink = "creative";
+        } else if (this.currentProject == "Read more") {
+            this.currentLink = "about";
+        } else if (this.currentProject == "Aravali Expanse") {
+            this.currentLink = "aravali-expanse";
+        } else if (this.currentProject == "House of Courtyards") {
+            this.currentLink = "gfarmhousee";
+        } else if (this.currentProject == "House of Frames") {
+            this.currentLink = "m-residence-2-gurgaon";
+        } else if (this.currentProject == "Atrium Home") {
+            this.currentLink = "k-residence-2";
+        } else if (this.currentProject == "Footer") {
+            // Handle link for Footer. For example, set to a non-navigable value or a specific anchor/route.
+            // If NuxtLink's :to is undefined or null, it might render as a span.
+            // If you want it to go nowhere, you might set this.currentLink = "#" or similar.
+            // For now, let's clear it or set to a placeholder to avoid linking to previous project.
+            this.currentLink = ""; // Or handle as appropriate for your application
+        }
+
+        const targetRefName = sectionRefNames[this.currentSection];
+        const refValue = this.$refs[targetRefName];
+
+        if (refValue) {
+            // Ensure we're calling scrollIntoView on a DOM element
+            const elementToScroll = refValue.$el || refValue;
+            elementToScroll.scrollIntoView({
+                behavior: "smooth",
+            });
+        } else {
+            console.error(`Ref "${targetRefName}" not found for scrolling.`);
+        }
+    },
 	},
-	mounted() {
-		document.documentElement.classList.add("index-page");
-		this.$nextTick(() => {
-			window.addEventListener("scroll", this.updateTitleHolderOpacity);
+  mounted() {
+    document.documentElement.classList.add("index-page");
+    this.$nextTick(() => {
+        window.addEventListener("scroll", this.updateTitleHolderOpacity);
 
-			// Get references to the sections
-			this.sections = ["section1", "section2", "section3", "section4", "section5", "section6"].map(section => {
-				return this.$refs[section];
-			});
+        // Get references to the sections
+        const sectionRefKeys = ["section1", "section2", "aravaliSection", "section3", "section4", "section5", "section6"];
+        this.sections = sectionRefKeys.map(key => {
+            const refItem = this.$refs[key];
+            if (refItem) {
+                // If refItem is a component instance (e.g., Footer), refItem.$el is its root DOM element.
+                // If refItem is already a DOM element, refItem.$el will be undefined, so we use refItem itself.
+                return refItem.$el || refItem;
+            } else {
+                // This case should ideally not happen if all refs are correctly defined in the template
+                // and are not conditionally rendered out.
+                console.warn(`Section with ref key "${key}" was not found. This might lead to errors.`);
+                return null; // Or handle this more robustly
+            }
+        }).filter(Boolean); // Filter out any nulls if refs were missing, though this might change array length and affect indexing if not all refs are found.
+                           // Assuming all refs are present, .filter(Boolean) won't change the array if all are found.
 
-			setTimeout(() => {
-				window.scrollTo(0, 0);
-				this.loaded = true;
-			}, 0);
-		});
-		window.addEventListener("scroll", this.updateSectionOnScroll); // Add this line
-	},
+        // Optional: Add a check if the number of sections matches projectNames to avoid indexing issues.
+        if (this.sections.length !== this.projectNames.length) {
+            console.warn('Mismatch between the number of resolved section elements and project names. This may cause issues.');
+        }
+
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+            this.loaded = true;
+        }, 0);
+    });
+    window.addEventListener("scroll", this.updateSectionOnScroll); // Add this line
+  },
 	beforeUnmount() {
 		document.documentElement.classList.remove("index-page");
 		window.removeEventListener("scroll", this.updateTitleHolderOpacity);
@@ -305,6 +359,11 @@ export default {
 		background: no-repeat url("@/assets/atrium-mobile.png") !important;
 		background-size: cover !important;
 	}
+
+	.project-aravali {
+		background: no-repeat url("@/assets/aravali-expanse-mobile.jpg") !important;
+		background-size: cover !important;
+	}
 }
 
 #project-name,
@@ -401,10 +460,15 @@ export default {
 	background: no-repeat url("@/assets/atrium.jpg");
 }
 
+.project-aravali {
+	background: no-repeat url("@/assets/aravali-expanse.jpg"); /* Add your image */
+}
+
 .project1,
 .project2,
 .project3,
-.project4 {
+.project4,
+.project-aravali {
 	position: relative;
 	top: -7rem;
 	z-index: -1;
@@ -472,7 +536,8 @@ export default {
 	.project1,
 	.project2,
 	.project3,
-	.project4 {
+	.project4,
+  .project-aravali {
 		/* top: -3.65rem */
 	}
 
@@ -562,3 +627,4 @@ export default {
 	}
 }
 </style>
+ 
