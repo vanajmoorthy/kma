@@ -473,7 +473,7 @@ main {
 }
 
 .image-item:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px);
     cursor: pointer;
 }
 
