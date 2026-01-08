@@ -1,4 +1,4 @@
- <template>
+<template>
 	<main>
 		<div class="control">
 			<h2>{{ current }}</h2>
@@ -9,7 +9,7 @@
 				</a>
 			</div>
 		</div>
-		<Grid :images="list"></Grid>
+		<Grid :images="list" :loading="loading" @images-loaded="handleImagesLoaded" />
 	</main>
 </template>
 
@@ -25,7 +25,7 @@ main {
 }
 
 .control {
-	padding-top: 6rem;
+	padding-top: 10rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -77,13 +77,33 @@ main {
 
 @media screen and (max-width: 650px) {
 	.control {
-		padding-top: 7rem;
+		padding-top: 10rem;
 	}
 }
 </style>
 
 <script setup>
-import { ref } from 'vue';
+// @ts-nocheck
+import { ref, onMounted } from 'vue';
+
+const config = useRuntimeConfig()
+const route = useRoute()
+
+useSeoMeta({
+	title: 'Projects | Kumar Moorthy & Associates - Architecture Portfolio',
+	ogTitle: 'Projects | Kumar Moorthy & Associates - Architecture Portfolio',
+	description: 'View the architecture and interior design portfolio of Kumar Moorthy & Associates (Kumar Moorthy and Associates). Award winning residential, commercial, and institutional projects in Delhi NCR and across India.',
+	ogDescription: 'View the architecture and interior design portfolio of Kumar Moorthy & Associates. Award winning projects in Delhi NCR and across India.',
+	ogImage: `${config.public.siteUrl}/assets/logo.png`,
+	ogUrl: `${config.public.siteUrl}${route.path}`,
+	keywords: 'Kumar Moorthy & Associates projects, Kumar Moorthy and Associates portfolio, architecture projects Delhi, residential architecture, commercial architecture, interior design projects, KM&A projects',
+})
+
+useHead({
+	link: [
+		{ rel: 'canonical', href: `${config.public.siteUrl}${route.path}` },
+	],
+})
 
 const { client } = usePrismic();
 
@@ -144,10 +164,45 @@ for (const post of sortedPosts) {
 
 const list = ref(subtypeImages["All Projects"]);
 const current = ref("All Projects");
-
+const loading = ref(true);
+const imagesReady = ref(false);
 
 function changeGrid(category) {
-	list.value = subtypeImages[category];
+	// Brief loading state to prevent flicker when switching categories
+	// Images are already in memory, so this is just for smooth transition
+	loading.value = true;
 	current.value = category;
+	imagesReady.value = false;
+	
+	// Use requestAnimationFrame to ensure DOM update happens, then show content
+	requestAnimationFrame(() => {
+		list.value = subtypeImages[category] || [];
+		// Very brief delay to prevent flicker (50ms is barely noticeable)
+		setTimeout(() => {
+			loading.value = false;
+		}, 50);
+	});
 }
+
+function handleImagesLoaded() {
+	// All images have loaded, safe to show them
+	imagesReady.value = true;
+}
+
+onMounted(() => {
+	// On initial load, wait for images to load before hiding skeleton
+	// This prevents layout shift on hard refresh
+	// Minimum delay to ensure consistent experience
+	setTimeout(() => {
+		if (imagesReady.value || list.value.length === 0) {
+			// Images already loaded or no images, hide skeleton
+			loading.value = false;
+		} else {
+			// Wait a bit more for images to load
+			setTimeout(() => {
+				loading.value = false;
+			}, 400);
+		}
+	}, 300);
+});
 </script>

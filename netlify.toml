@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Netlify automatically detects Nuxt 3 and enables SSR
+# No additional plugins needed for Nuxt 3
+

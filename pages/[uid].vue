@@ -3,42 +3,63 @@
 
         <section id="hero">
             <h2>{{ page.data.title[0].text }}</h2>
+            <div id="control">
+                <img class="down-arrow" src="@/assets/down.png" alt="down arrow" @click="scrollToDetails" />
+            </div>
             <img class="hero-image" :src="page.data.image.url" alt="Project main image">
         </section>
-        <div id="modal" v-if="displayModal">
-            <div class="close">
-                <button @click="displayModal = false"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"
-                        viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
-                        <path
-                            d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
-                        </path>
-                    </svg></button>
-            </div>
-            <div class="image-holder">
-                <button id="left" @click="prev"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-                        viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
-                        <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
-                    </svg></button>
-                <div class="direct-img-holder">
-                    <img :src="image" />
+        <div id="modal" v-if="displayModal" :class="{ rotated: isRotated }">
+            <div class="modal-content" :class="{ rotated: isRotated }">
+                <div class="close">
+                    <button @click="closeModal"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"
+                            viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                            <path
+                                d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                            </path>
+                        </svg></button>
                 </div>
-                <button id="right" @click="next"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-                        viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;">
-                        <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
-                    </svg></button>
+                <!-- Rotate button - mobile only -->
+                <button class="rotate-btn" @click="toggleRotate" :title="isRotated ? 'Exit fullscreen' : 'Rotate to landscape'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                        <!-- Phone/screen rotation icon -->
+                        <path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32zm-6.25-.77c-.59-.59-1.54-.59-2.12 0L1.75 8.11c-.59.59-.59 1.54 0 2.12l12.02 12.02c.59.59 1.54.59 2.12 0l6.36-6.36c.59-.59.59-1.54 0-2.12L10.23 1.75zm4.6 19.44L2.81 9.19l6.36-6.36 12.02 12.02-6.36 6.36zm-8.31 1.29C3.27 20.93.93 17.76.57 14H-.93c.51 6.16 5.66 11 11.95 11l.66-.03-3.81-3.81-1.33 1.32z"/>
+                    </svg>
+                </button>
+                <div class="image-holder">
+                    <button id="left" @click="prev"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                            viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                            <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
+                        </svg></button>
+                    <div class="direct-img-holder">
+                        <img :src="image" />
+                    </div>
+                    <button id="right" @click="next"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                            viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);">
+                            <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+                        </svg></button>
+                </div>
             </div>
         </div>
-        <div class="details">
+        <div class="details" ref="detailsSection">
             <div class="image-gallery">
-                <div v-for="(url, index) in imageUrls" class="image-item">
+                <div v-for="(url, index) in mainGalleryImages" :key="'main-' + index" class="image-item">
                     <button @click.stop="displayModall(true, index)">
                         <img :src="url" alt="Project Image">
                     </button>
                 </div>
             </div>
-            <div class="description">
-                <h3>{{ page.data.title[0].text }}</h3>
-                <p v-for="text in description">{{ text.text }}</p>
+            <div class="sidebar">
+                <div class="description">
+                    <h3>{{ page.data.title[0].text }}</h3>
+                    <p v-for="text in description">{{ text.text }}</p>
+                </div>
+                <div class="sidebar-images">
+                    <div v-for="(url, index) in sidebarImages" :key="'sidebar-' + index" class="image-item">
+                        <button @click.stop="displayModall(true, mainGalleryImages.length + index)">
+                            <img :src="url" alt="Project Image">
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -94,11 +115,26 @@ for (const key in prismicDocData) {
 
 const images = imageUrls; // This is a non-reactive copy. Fine if imageUrls is populated once.
 
+// Split images: main gallery gets ~2/3, sidebar gets ~1/3 (matching the 2fr 1fr grid ratio)
+const sidebarImageCount = Math.max(1, Math.floor(imageUrls.length / 3));
+const mainGalleryImages = imageUrls.slice(0, imageUrls.length - sidebarImageCount);
+const sidebarImages = imageUrls.slice(imageUrls.length - sidebarImageCount);
+
 const index = ref(0); // For modal's current image index
 // Safer initialization for 'image' ref, in case 'images' array is empty
 const image = ref(images.length > 0 ? images[0] : ''); // The URL for the modal's current image
 
 let displayModal = ref(false);
+const isRotated = ref(false);
+
+const toggleRotate = () => {
+    isRotated.value = !isRotated.value;
+};
+
+const closeModal = () => {
+    displayModal.value = false;
+    isRotated.value = false; // Reset rotation when closing
+};
 
 const displayModall = (isOpen, imageIdx = 0) => { // Renamed param to avoid conflict with 'index' ref
     if (isOpen) {
@@ -127,18 +163,44 @@ const prev = () => {
     image.value = images[index.value];
 };
 
-// const onClickOutside = (e) => { // If you re-enable this
-//     if (e.target.localName !== "button" && e.target.closest('#modal .direct-img-holder') === null) {
-//         displayModal.value = false;
-//     }
-// };
+const detailsSection = ref(null);
 
-// onMounted(() => {
-//     // window.addEventListener("click", onClickOutside);
-// });
-// onBeforeUnmount(() => { // Always clean up global event listeners
-//     // window.removeEventListener("click", onClickOutside);
-// });
+const scrollToDetails = () => {
+    if (detailsSection.value) {
+        const elementPosition = detailsSection.value.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - 64; // 4rem offset for navbar
+        
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+        });
+    }
+};
+
+// Keyboard event handlers for carousel
+const handleKeyDown = (e) => {
+    if (!displayModal.value) return;
+    
+    switch (e.key) {
+        case 'Escape':
+            closeModal();
+            break;
+        case 'ArrowLeft':
+            prev();
+            break;
+        case 'ArrowRight':
+            next();
+            break;
+    }
+};
+
+onMounted(() => {
+    window.addEventListener("keydown", handleKeyDown);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener("keydown", handleKeyDown);
+});
 
 // SEO Meta (ensure page.value and page.value.data are checked)
 if (page.value && page.value.data) {
@@ -180,10 +242,15 @@ main {
     top: 10px;
     right: 10px;
     transition: 0.2s ease all;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.close>button svg {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
 }
 
 .close>button:hover {
-    cursor: pointer;
     opacity: 0.7;
 }
 
@@ -191,6 +258,7 @@ main {
     position: fixed;
     z-index: 2;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
@@ -199,17 +267,65 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.4s ease;
+}
+
+/* Rotate button - hidden by default, shown on mobile */
+.rotate-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease all;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.rotate-btn:hover {
+    opacity: 0.7;
+}
+
+/* Rotated state - rotate 90 degrees clockwise for landscape view */
+.modal-content.rotated {
+    transform: rotate(90deg);
+    width: 100vh;
+    height: 100vw;
 }
 
 .image-holder {
     display: flex;
     align-items: center;
     width: 100%;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+}
+
+.direct-img-holder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
 
 .direct-img-holder>img {
-    max-width: 90%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 #left,
@@ -220,24 +336,68 @@ main {
     font-size: 3rem;
     font-family: "NeueHaas45Bold";
     font-weight: 800;
-    margin: 1rem;
     transition: 0.2s ease all;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+#left {
+    left: 0.25rem;
+}
+
+#right {
+    right: 0.25rem;
+}
+
+#left svg,
+#right svg {
+    width: 64px;
+    height: 64px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
 }
 
 #left:hover,
 #right:hover {
-    cursor: pointer;
     opacity: 0.7;
+}
+
+#control {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.down-arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 auto;
+    transition: 0.2s ease all;
+    transform: translateX(0);
+}
+
+#control:hover .down-arrow {
+    transform: translateY(6px);
 }
 
 #hero>h2 {
     position: absolute;
-    bottom: 1rem;
+    bottom: 5rem;
     right: 1rem;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 0 0.75rem;
-    font-size: 1.2rem;
+    font-size: 2.5rem;
     font-weight: 200;
     z-index: 1;
 }
@@ -251,12 +411,25 @@ main {
 
 
 .details {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
     padding: 2rem 4rem;
 }
 
+.image-gallery {
+    column-count: 2;
+    column-gap: 10px;
+}
+
+.sidebar {
+    /* Natural flow: description first, then images */
+    display: block;
+}
+
 .description {
-    margin-left: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 0.5rem;
 }
 
 .description>p {
@@ -264,7 +437,6 @@ main {
     margin-top: 0.2rem;
     font-family: "NeueHaas45";
     font-size: 1rem;
-
     text-align: justify;
 }
 
@@ -273,19 +445,8 @@ main {
     margin-bottom: 1rem;
 }
 
-.image-gallery {
-    column-count: 2;
-    margin-top: 0.5rem;
-    /* width: 100%; */
-    /* max-width: 90vw; */
-    /* margin: auto; */
-    /* Number of columns */
-    /* No gap between columns */
-    /* padding: 2rem; */
-    column-gap: 10px;
-    margin-right: 1rem;
-    max-width: 65vw;
-    /* width: 20000%; */
+.sidebar-images .image-item {
+    margin-bottom: 5px;
 }
 
 
@@ -321,29 +482,22 @@ main {
 
 }
 
-.direct-img-holder {
-    width: 80vw;
-    display: flex;
-    justify-content: center;
-    
-}
-
 @media screen and (max-width: 1040px) {
     .details {
-        flex-direction: column-reverse;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        order: -1;
+    }
+
+    .sidebar-images {
+        display: none;
     }
 
     .image-gallery {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .description {
-        margin-left: 0;
-    }
-
-    .direct-img-holder>img {
-        max-width: 70%;
+        column-count: 2;
     }
 }
 
@@ -356,19 +510,33 @@ main {
         padding: 2rem;
     }
 
-    #left,
+    #left {
+        left: 0;
+    }
+    
     #right {
-        margin: 0rem;
+        right: 0;
     }
 
-    .direct-img-holder {
-        width: 100vw;
+    #left svg,
+    #right svg {
+        width: 48px;
+        height: 48px;
     }
 
-    .direct-img-holder>img {
-        max-width: 90%;
-        border: 1px solid white;
+    /* Show rotate button on mobile */
+    .rotate-btn {
+        display: block;
+    }
+
+    #hero>h2 {
+        font-size: 1.8rem;
+    }
+
+    .down-arrow {
+        width: 2rem;
+        height: 2rem;
     }
 }
 </style>
-    
+

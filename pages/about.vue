@@ -72,8 +72,25 @@
 	</div>
 </template>
 
-<script>
-export default {};
+<script setup>
+const config = useRuntimeConfig()
+const route = useRoute()
+
+useSeoMeta({
+	title: 'About Us | Kumar Moorthy & Associates - Principal Architects',
+	ogTitle: 'About Us | Kumar Moorthy & Associates - Principal Architects',
+	description: 'Learn about Kumar Moorthy & Associates (Kumar Moorthy and Associates), established in 1990. Meet principal architects Narayan Moorthy and Mallika Kumar. Award winning architecture firm in Delhi specializing in residential, commercial, and institutional design.',
+	ogDescription: 'Learn about Kumar Moorthy & Associates (Kumar Moorthy and Associates), established in 1990. Meet principal architects Narayan Moorthy and Mallika Kumar.',
+	ogImage: `${config.public.siteUrl}/assets/logo.png`,
+	ogUrl: `${config.public.siteUrl}${route.path}`,
+	keywords: 'Kumar Moorthy & Associates, Kumar Moorthy and Associates, Narayan Moorthy, Mallika Kumar, architects Delhi, about Kumar Moorthy, architecture firm Delhi, principal architects',
+})
+
+useHead({
+	link: [
+		{ rel: 'canonical', href: `${config.public.siteUrl}${route.path}` },
+	],
+})
 </script>
 
 <style scoped>
@@ -109,7 +126,7 @@ span>img {
 }
 
 #principals {
-	margin-top: 2rem;
+	margin-top: 0;
 }
 
 .light {
@@ -167,7 +184,7 @@ span>img {
 }
 
 main {
-	padding-top: 6rem;
+	padding-top: 10rem;
 	text-align: center;
 }
 
@@ -205,7 +222,7 @@ main>p {
 
 @media screen and (max-width: 770px) {
 	main {
-		padding-top: 8rem;
+		padding-top: 10rem;
 	}
 
 	.about {

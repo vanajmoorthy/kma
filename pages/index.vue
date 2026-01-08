@@ -1,5 +1,6 @@
   <template>
 	<div class="container" :class="{ 'is-loaded': loaded }">
+		<h1 class="seo-only">Kumar Moorthy & Associates - Award Winning Architects and Interior Designers in Delhi</h1>
 		<div id="title-holder">
 			<div id="spacer">g</div>
 			<div id="control">
@@ -76,11 +77,28 @@
 </template>
 
 <script setup>
+const config = useRuntimeConfig()
+
 useSeoMeta({
-	title: 'Kumar Moorthy & Associates',
-	ogTitle: 'Kumar Moorthy & Associates',
-	description: 'Award winning partnership firm of architects and interior designers based in Delhi.',
-	ogDescription: 'Award winning partnership firm of architects and interior designers based in Delhi.',
+	title: 'Kumar Moorthy & Associates | Award Winning Architects & Interior Designers in Delhi',
+	ogTitle: 'Kumar Moorthy & Associates | Award Winning Architects & Interior Designers in Delhi',
+	description: 'Kumar Moorthy & Associates (also known as Kumar Moorthy and Associates or KM&A) is an award winning partnership firm of architects and interior designers based in Delhi. Established in 1990, specializing in residential design, commercial spaces, institutional and hotel design.',
+	ogDescription: 'Kumar Moorthy & Associates (also known as Kumar Moorthy and Associates or KM&A) is an award winning partnership firm of architects and interior designers based in Delhi. Established in 1990, specializing in residential design, commercial spaces, institutional and hotel design.',
+	ogImage: `${config.public.siteUrl}/assets/logo.png`,
+	ogUrl: config.public.siteUrl,
+	ogType: 'website',
+	ogSiteName: 'Kumar Moorthy & Associates',
+	twitterCard: 'summary_large_image',
+	twitterTitle: 'Kumar Moorthy & Associates | Award Winning Architects & Interior Designers in Delhi',
+	twitterDescription: 'Award winning partnership firm of architects and interior designers based in Delhi. Established in 1990.',
+	twitterImage: `${config.public.siteUrl}/assets/logo.png`,
+	keywords: 'Kumar Moorthy & Associates, Kumar Moorthy and Associates, KM&A, architects Delhi, interior designers Delhi, architecture firm Delhi, award winning architects, residential architects, commercial architects, architectural design India, Delhi NCR architects',
+})
+
+useHead({
+	link: [
+		{ rel: 'canonical', href: config.public.siteUrl },
+	],
 })
 </script>
 
@@ -244,6 +262,18 @@ export default {
 </style>
 
 <style scoped>
+.seo-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
 #footer {
 	position: relative;
 	z-index: 5;
@@ -341,22 +371,22 @@ export default {
 	}
 
 	.project1 {
-		background: no-repeat url("@/assets/creative-mobile.png") !important;
+		background: no-repeat url("@/assets/creative-mobile.jpg") !important;
 		background-size: cover !important;
 	}
 
 	.project2 {
-		background: no-repeat url("@/assets/courtyards-mobile.png") !important;
+		background: no-repeat url("@/assets/courtyards-mobile.jpg") !important;
 		background-size: cover !important;
 	}
 
 	.project3 {
-		background: no-repeat url("@/assets/frames-mobile.png") !important;
+		background: no-repeat url("@/assets/frames-mobile.jpg") !important;
 		background-size: cover !important;
 	}
 
 	.project4 {
-		background: no-repeat url("@/assets/atrium-mobile.png") !important;
+		background: no-repeat url("@/assets/atrium-mobile.jpg") !important;
 		background-size: cover !important;
 	}
 

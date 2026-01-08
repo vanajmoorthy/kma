@@ -1,18 +1,81 @@
 <template>
     <div class="image-gallery">
-        <div v-for="post in props.images" :key="post.id" class="image-item">
-            <p class="project-title">{{ post.title }}</p>
-            <nuxt-link :to="post.uid">
-                <img class="grid-img" :src="post.imageUrl" :style="{ height: post.height + 'px' }" alt="">
-            </nuxt-link>
-        </div>
+        <!-- Loading skeleton tiles -->
+        <template v-if="props.loading">
+            <div v-for="n in 8" :key="'skeleton-' + n" class="image-item skeleton">
+                <div class="placeholder-box"></div>
+            </div>
+        </template>
+
+        <!-- Actual images -->
+        <template v-else>
+            <div
+                v-for="(post, index) in props.images"
+                :key="post.uid || (post.title + '-' + index)"
+                class="image-item"
+            >
+                <p class="project-title">{{ post.title }}</p>
+                <nuxt-link :to="post.uid">
+                    <img 
+                        class="grid-img" 
+                        :src="post.imageUrl" 
+                        :style="{ height: post.height + 'px' }" 
+                        alt=""
+                        @load="handleImageLoad"
+                    >
+                </nuxt-link>
+            </div>
+            <!-- Placeholder tiles for empty spots -->
+            <div
+                v-for="n in placeholderCount"
+                :key="'placeholder-' + n"
+                class="image-item placeholder"
+            >
+                <div class="placeholder-box"></div>
+            </div>
+        </template>
     </div>
 </template>
 
 <script setup>
+import { computed, ref, watch } from 'vue'
+
 const props = defineProps({
-    images: Array
+    images: {
+        type: Array,
+        default: () => [],
+    },
+    loading: {
+        type: Boolean,
+        default: false,
+    },
 })
+
+const emit = defineEmits(['images-loaded'])
+
+const loadedImages = ref(0)
+const totalImages = computed(() => props.images.length)
+
+// Calculate how many placeholder tiles we need to fill the grid nicely
+// Aim for at least 8-12 items total depending on screen size
+const placeholderCount = computed(() => {
+    const minItems = 12
+    const currentCount = props.images.length
+    return Math.max(0, minItems - currentCount)
+})
+
+function handleImageLoad() {
+    loadedImages.value++
+    if (loadedImages.value >= totalImages.value) {
+        // All images loaded, emit event to parent
+        emit('images-loaded')
+    }
+}
+
+// Reset loaded count when images change
+watch(() => props.images, () => {
+    loadedImages.value = 0
+}, { deep: true })
 </script>
 
 <style scoped>
@@ -28,24 +91,17 @@ const props = defineProps({
 .image-gallery {
     column-count: 4;
     margin-top: 0.5rem;
-    /* max-width: 90vw; */
-    /* margin: auto; */
-    /* Number of columns */
-    /* No gap between columns */
     padding: 2rem;
     column-gap: 10px;
 }
 
-
 .image-item {
     display: inline-block;
     width: 100%;
-    margin-bottom: 0;
+    margin-bottom: 5px;
     break-inside: avoid-column;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
-    /* background-color: white; */
-    margin-bottom: 5px;
     position: relative;
 }
 
@@ -56,22 +112,50 @@ const props = defineProps({
 }
 
 .image-item:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px);
     cursor: pointer;
+    transition: transform 0.2s ease-out;
 }
 
-/* Negative margins to make images touch */
-.image-item:not(:first-child) {
-    /* margin-top: -5px; */
-    /* Adjust this value as needed */
+.placeholder:hover {
+    transform: none;
+    cursor: default;
 }
 
-/* Add a first-child negative margin to counteract the top margin on the first image */
-.image-item:first-child {
-    /* margin-top: 0; */
+.placeholder-box {
+    width: 100%;
+    padding-top: 70%;
+    background-color: #e7ded6;
 }
 
+.placeholder .placeholder-box {
+    background-color: #e7ded6;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #e7ded6,
+        #e7ded6 20px,
+        #f0e8e0 20px,
+        #f0e8e0 40px
+    );
+}
 
+.skeleton .placeholder-box {
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
 
 @media screen and (max-width: 880px) {
     .image-gallery {
@@ -82,7 +166,6 @@ const props = defineProps({
 @media (max-width: 768px) {
     .image-gallery {
         column-count: 2;
-        /* Change the number of columns for smaller screens */
     }
 }
 
@@ -92,4 +175,4 @@ const props = defineProps({
     }
 }
 </style>
- 
+
