@@ -8,3 +8,18 @@
 # Netlify automatically detects Nuxt 3 and enables SSR
 # No additional plugins needed for Nuxt 3
 
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://static.cdn.prismic.io https://kmanda.prismic.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://kmanda.cdn.prismic.io https://kmanda.prismic.io; frame-src https://kmanda.prismic.io;"
+
+[[headers]]
+  for = "/_nuxt/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+

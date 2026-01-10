@@ -5,12 +5,17 @@ export default defineNuxtConfig({
   app: {
     head: {
       script: [
-        { src: "https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js" },
+        { src: "https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js", defer: true },
       ],
       htmlAttrs: {
         lang: "en",
       },
-      link: [{ rel: "canonical", href: "https://kumarmoorthy.com" }],
+      link: [
+        { rel: "preconnect", href: "https://kmanda.prismic.io" },
+        { rel: "preconnect", href: "https://static.cdn.prismic.io" },
+        { rel: "preload", href: "/assets/creative.jpg", as: "image", fetchpriority: "high" },
+        { rel: "canonical", href: "https://kumarmoorthy.com" },
+      ],
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -47,6 +52,33 @@ export default defineNuxtConfig({
           path: "/:uid",
         },
       ],
+    },
+  },
+
+  nitro: {
+    externals: {
+      inline: ['fsevents'],
+    },
+  },
+
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          assetFileNames: (assetInfo) => {
+            // Optimize image file names
+            if (/\.(jpg|jpeg|png|gif|svg|webp)$/.test(assetInfo.name)) {
+              return 'assets/images/[name]-[hash][extname]'
+            }
+            return 'assets/[name]-[hash][extname]'
+          },
+        },
+      },
+    },
+    ssr: {
+    },
+    optimizeDeps: {
+      exclude: ['fsevents'],
     },
   },
 });

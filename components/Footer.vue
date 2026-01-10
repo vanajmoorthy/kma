@@ -35,6 +35,10 @@
 a {
     text-decoration: none;
     color: white;
+    display: inline-block;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem 0;
 }
 
 footer {

@@ -1,16 +1,22 @@
 @font-face {
 	font-family: "NeueHaas45";
-	src: url("@/assets/NeueHaasDisplayThin.ttf") format("truetype");
+	src: url("@/assets/NeueHaasDisplayThin.woff2") format("woff2"),
+		 url("@/assets/NeueHaasDisplayThin.ttf") format("truetype");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "NeueHaas45Italic";
-	src: url("@/assets/NeueHaasDisplayThinItalic.ttf") format("truetype");
+	src: url("@/assets/NeueHaasDisplayThinItalic.woff2") format("woff2"),
+		 url("@/assets/NeueHaasDisplayThinItalic.ttf") format("truetype");
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "NeueHaas45Bold";
-	src: url("@/assets/NeueHaasDisplayRoman.ttf") format("truetype");
+	src: url("@/assets/NeueHaasDisplayRoman.woff2") format("woff2"),
+		 url("@/assets/NeueHaasDisplayRoman.ttf") format("truetype");
+	font-display: swap;
 }
 
 * {

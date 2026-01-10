@@ -1,7 +1,9 @@
 <template>
 	<div>
 		<Nav></Nav>
-		<NuxtPage />
+		<main id="main-content">
+			<NuxtPage />
+		</main>
 	</div>
 </template>
 

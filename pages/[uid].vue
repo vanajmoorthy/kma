@@ -44,19 +44,19 @@
             <div class="image-gallery">
                 <div v-for="(url, index) in mainGalleryImages" :key="'main-' + index" class="image-item">
                     <button @click.stop="displayModall(true, index)">
-                        <img :src="url" alt="Project Image">
+                        <img :src="url" alt="Project Image" loading="lazy" />
                     </button>
                 </div>
             </div>
             <div class="sidebar">
                 <div class="description">
-                    <h3>{{ page.data.title[0].text }}</h3>
+                    <h3 v-if="page?.data?.title?.[0]?.text">{{ page.data.title[0].text }}</h3>
                     <p v-for="text in description">{{ text.text }}</p>
                 </div>
                 <div class="sidebar-images">
                     <div v-for="(url, index) in sidebarImages" :key="'sidebar-' + index" class="image-item">
                         <button @click.stop="displayModall(true, mainGalleryImages.length + index)">
-                            <img :src="url" alt="Project Image">
+                            <img :src="url" alt="Project Image" loading="lazy" />
                         </button>
                     </div>
                 </div>
@@ -90,8 +90,8 @@ if (!page.value || !page.value.data) {
     // This situation should ideally be handled by the error thrown above.
     // If execution reaches here, it's an unexpected state.
     console.error("Project data is not available after fetch.");
-    // You might want to throw an error or set default empty values for prismicDocData and description
-    // to prevent further errors, though Nuxt's error page should take over from createError.
+    // Throw error to show 404 page
+    throw createError({ statusCode: 404, message: "Project not found" });
 }
 
 // Use .value to access Ref data in <script setup>

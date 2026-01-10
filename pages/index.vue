@@ -10,7 +10,7 @@
 			<div id="project-name">
 				<transition name="fade">
 					<NuxtLink class="page-link" :to="currentLink">
-						<h3 key="projectName">{{ currentProject }}</h3>
+						<span class="project-name" key="projectName">{{ currentProject }}</span>
 						<img class="right-arrow" src="@/assets/forward.png" alt="View project" />
 					</NuxtLink>
 				</transition>
@@ -309,7 +309,7 @@ export default {
 }
 
 @media screen and (max-width: 560px) {
-	.page-link>h3 {
+	.page-link>.project-name {
 		font-size: 1.2rem !important;
 	}
 }
@@ -412,7 +412,7 @@ export default {
 
 #project-name {
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 	justify-content: flex-end;
 	width: 241px;
 	transition: 0.2s ease all;
@@ -435,28 +435,27 @@ export default {
 	color: white;
 	display: flex;
 	align-items: center;
+	gap: 0.2rem;
 }
 
-.page-link>h3 {
-	display: flex;
-	align-items: center;
+.page-link>.project-name {
 	font-size: 1.5rem;
+	line-height: 1;
 }
 
 .right-arrow {
 	height: 25px;
-	width: 30px;
-	margin-left: 0.2rem;
+	width: 25px;
+	object-fit: contain;
+	display: block;
+	flex-shrink: 0;
 }
 
-#project-name>h3 {
+.project-name {
 	color: white;
 	font-size: 1.5rem;
-	display: flex;
-	align-items: center;
-	/* padding-right: 2rem; */
-	position: relative;
-	top: -7.5px;
+	font-weight: normal;
+	line-height: 1;
 }
 
 #read-more {
@@ -514,7 +513,7 @@ export default {
 
 .about {
 	height: 100vh;
-	background-color: #b79775;
+	background-color: #866745;
 	color: white;
 	position: relative;
 	top: -7rem;
@@ -615,7 +614,7 @@ export default {
 		min-width: 0px;
 	}
 
-	.page-link>h3 {
+	.page-link>.project-name {
 		width: min-content;
 	}
 
@@ -630,7 +629,7 @@ export default {
 		margin-top: 1.3rem;
 	}
 
-	#project-name>h3 {
+	.project-name {
 		font-size: 1.0rem;
 	}
 

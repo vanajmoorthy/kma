@@ -20,9 +20,10 @@
                         class="grid-img" 
                         :src="post.imageUrl" 
                         :style="{ height: post.height + 'px' }" 
-                        alt=""
+                        :alt="post.title || 'Project Image'"
+                        loading="lazy"
                         @load="handleImageLoad"
-                    >
+                    />
                 </nuxt-link>
             </div>
             <!-- Placeholder tiles for empty spots -->

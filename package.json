@@ -7,7 +7,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "slicemachine": "start-slicemachine"
+    "slicemachine": "start-slicemachine",
+    "convert-fonts": "node scripts/convert-fonts.js",
+    "build:with-fonts": "npm run convert-fonts && nuxt build"
   },
   "devDependencies": {
     "@nuxtjs/prismic": "^3.0.1",
@@ -15,6 +17,9 @@
     "@types/node": "^18",
     "nuxt": "^3.5.2",
     "slice-machine-ui": "^1.8.0"
+  },
+  "optionalDependencies": {
+    "ttf2woff2": "^5.0.0"
   },
   "dependencies": {
     "vue-silentbox": "^3.0.4"

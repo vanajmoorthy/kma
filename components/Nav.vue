@@ -4,10 +4,17 @@
 	}">
 		<div id="home">
 			<h1 :style="getLinkStyles">KM&A</h1>
-			<div class="hamburger" v-on="{ click: toggleMenu }" :class="{ open: isMenuOpen }">
-				<div id="line1" :style="getLinkStyles"></div>
-				<div id="line2" :style="getLinkStyles"></div>
-			</div>
+			<button 
+				class="hamburger" 
+				@click="toggleMenu" 
+				:class="{ open: isMenuOpen }"
+				:aria-expanded="isMenuOpen"
+				aria-label="Toggle navigation menu"
+				aria-controls="nav-links"
+			>
+				<span id="line1" :style="getLinkStyles"></span>
+				<span id="line2" :style="getLinkStyles"></span>
+			</button>
 		</div>
 		<div id="nav-links" :class="{ expand: isMenuOpen }">
 			<NuxtLink class="nav-link link" :style="getLinkStyles" to="/">Home
@@ -212,6 +219,10 @@ ul {
 	justify-content: space-between;
 	transition: 0.2s ease all;
 	display: none;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
 }
 
 .open #line1 {
@@ -225,6 +236,11 @@ ul {
 .hamburger:hover {
 	cursor: pointer;
 	opacity: 0.6;
+}
+
+.hamburger:focus {
+	outline: 2px solid var(--link-color);
+	outline-offset: 2px;
 }
 
 #line1,
