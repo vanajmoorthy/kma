@@ -13,7 +13,6 @@ export default defineNuxtConfig({
       link: [
         { rel: "preconnect", href: "https://kmanda.prismic.io" },
         { rel: "preconnect", href: "https://static.cdn.prismic.io" },
-        { rel: "preload", href: "/assets/creative.jpg", as: "image", fetchpriority: "high" },
         { rel: "canonical", href: "https://kumarmoorthy.com" },
       ],
       meta: [
