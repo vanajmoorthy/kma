@@ -10,10 +10,12 @@
 # IMPORTANT: Disable prerendering in Netlify dashboard: Site settings > Build & deploy > Prerendering
 
 # Redirect all requests to the Netlify function for SSR
+# force = false means static files in .output/public are served directly
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/server"
   status = 200
+  force = false
 
 [[headers]]
   for = "/*"
