@@ -371,22 +371,22 @@ export default {
 	}
 
 	.project1 {
-		background: no-repeat url("@/assets/creative-mobile.png") !important;
+		background: no-repeat url("@/assets/creative-mobile.jpg") !important;
 		background-size: cover !important;
 	}
 
 	.project2 {
-		background: no-repeat url("@/assets/courtyards-mobile.png") !important;
+		background: no-repeat url("@/assets/courtyards-mobile.jpg") !important;
 		background-size: cover !important;
 	}
 
 	.project3 {
-		background: no-repeat url("@/assets/frames-mobile.png") !important;
+		background: no-repeat url("@/assets/frames-mobile.jpg") !important;
 		background-size: cover !important;
 	}
 
 	.project4 {
-		background: no-repeat url("@/assets/atrium-mobile.png") !important;
+		background: no-repeat url("@/assets/atrium-mobile.jpg") !important;
 		background-size: cover !important;
 	}
 
