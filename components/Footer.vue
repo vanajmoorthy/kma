@@ -1,7 +1,7 @@
 <template>
     <footer id="footer">
         <div class="col1">
-            <p id="copyright">© Kumar Moorthy & Associates 2023</p>
+            <p id="copyright">© Kumar Moorthy & Associates 2026</p>
             <a target="_blank" rel="noopener noreferrer"
                 href="https://www.instagram.com/kumar.moorthy.architects/">Instagram</a>
             <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/kumarmoorthyassociates">Facebook</a>

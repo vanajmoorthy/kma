@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build && npm run build:copy-assets",
-    "build:copy-assets": "mkdir -p .output/public && cp -r .nuxt/dist/client/* .output/public/ 2>/dev/null || true",
+    "build:copy-assets": "mkdir -p .output/public && cp -r .nuxt/dist/client/* .output/public/ && cp -r public/* .output/public/ 2>/dev/null || true",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
