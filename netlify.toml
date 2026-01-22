@@ -9,6 +9,12 @@
 # Netlify automatically detects Nuxt 3 and enables SSR with the netlify preset
 # IMPORTANT: Disable prerendering in Netlify dashboard: Site settings > Build & deploy > Prerendering
 
+# Redirect all requests to the Netlify function for SSR
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
