@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  NITRO_PRESET = "netlify"
 
 # Netlify automatically detects Nuxt 3 and enables SSR with the netlify preset
 # IMPORTANT: Disable prerendering in Netlify dashboard: Site settings > Build & deploy > Prerendering
