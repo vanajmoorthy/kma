@@ -66,19 +66,6 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          assetFileNames: (assetInfo) => {
-            // Optimize image file names
-            if (assetInfo.name && /\.(jpg|jpeg|png|gif|svg|webp)$/.test(assetInfo.name)) {
-              return 'assets/images/[name]-[hash][extname]'
-            }
-            return 'assets/[name]-[hash][extname]'
-          },
-        },
-      },
-    },
     ssr: {
     },
     optimizeDeps: {
