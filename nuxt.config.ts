@@ -55,7 +55,12 @@ export default defineNuxtConfig({
     },
   },
 
+  // Configure for Netlify deployment
   nitro: {
+    preset: 'netlify',
+    prerender: {
+      crawlLinks: false,
+    },
     externals: {
       inline: ['fsevents'],
     },
@@ -67,7 +72,7 @@ export default defineNuxtConfig({
         output: {
           assetFileNames: (assetInfo) => {
             // Optimize image file names
-            if (/\.(jpg|jpeg|png|gif|svg|webp)$/.test(assetInfo.name)) {
+            if (assetInfo.name && /\.(jpg|jpeg|png|gif|svg|webp)$/.test(assetInfo.name)) {
               return 'assets/images/[name]-[hash][extname]'
             }
             return 'assets/[name]-[hash][extname]'
@@ -81,5 +86,9 @@ export default defineNuxtConfig({
       exclude: ['fsevents'],
     },
   },
-});
 
+  // Ensure proper asset handling
+  experimental: {
+    payloadExtraction: false,
+  },
+});

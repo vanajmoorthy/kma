@@ -10,7 +10,7 @@
 			<div id="project-name">
 				<transition name="fade">
 					<NuxtLink class="page-link" :to="currentLink">
-						<span class="project-name" key="projectName">{{ currentProject }}</span>
+						<h3 key="projectName">{{ currentProject }}</h3>
 						<img class="right-arrow" src="@/assets/forward.png" alt="View project" />
 					</NuxtLink>
 				</transition>
@@ -309,7 +309,7 @@ export default {
 }
 
 @media screen and (max-width: 560px) {
-	.page-link>.project-name {
+	.page-link>h3 {
 		font-size: 1.2rem !important;
 	}
 }
@@ -371,22 +371,22 @@ export default {
 	}
 
 	.project1 {
-		background: no-repeat url("@/assets/creative-mobile.jpg") !important;
+		background: no-repeat url("@/assets/creative-mobile.png") !important;
 		background-size: cover !important;
 	}
 
 	.project2 {
-		background: no-repeat url("@/assets/courtyards-mobile.jpg") !important;
+		background: no-repeat url("@/assets/courtyards-mobile.png") !important;
 		background-size: cover !important;
 	}
 
 	.project3 {
-		background: no-repeat url("@/assets/frames-mobile.jpg") !important;
+		background: no-repeat url("@/assets/frames-mobile.png") !important;
 		background-size: cover !important;
 	}
 
 	.project4 {
-		background: no-repeat url("@/assets/atrium-mobile.jpg") !important;
+		background: no-repeat url("@/assets/atrium-mobile.png") !important;
 		background-size: cover !important;
 	}
 
@@ -412,7 +412,7 @@ export default {
 
 #project-name {
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: flex-end;
 	width: 241px;
 	transition: 0.2s ease all;
@@ -435,27 +435,28 @@ export default {
 	color: white;
 	display: flex;
 	align-items: center;
-	gap: 0.2rem;
 }
 
-.page-link>.project-name {
+.page-link>h3 {
+	display: flex;
+	align-items: center;
 	font-size: 1.5rem;
-	line-height: 1;
 }
 
 .right-arrow {
 	height: 25px;
-	width: 25px;
-	object-fit: contain;
-	display: block;
-	flex-shrink: 0;
+	width: 30px;
+	margin-left: 0.2rem;
 }
 
-.project-name {
+#project-name>h3 {
 	color: white;
 	font-size: 1.5rem;
-	font-weight: normal;
-	line-height: 1;
+	display: flex;
+	align-items: center;
+	/* padding-right: 2rem; */
+	position: relative;
+	top: -7.5px;
 }
 
 #read-more {
@@ -513,7 +514,7 @@ export default {
 
 .about {
 	height: 100vh;
-	background-color: #866745;
+	background-color: #b79775;
 	color: white;
 	position: relative;
 	top: -7rem;
@@ -614,7 +615,7 @@ export default {
 		min-width: 0px;
 	}
 
-	.page-link>.project-name {
+	.page-link>h3 {
 		width: min-content;
 	}
 
@@ -629,7 +630,7 @@ export default {
 		margin-top: 1.3rem;
 	}
 
-	.project-name {
+	#project-name>h3 {
 		font-size: 1.0rem;
 	}
 

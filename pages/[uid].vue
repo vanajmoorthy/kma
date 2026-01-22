@@ -50,7 +50,7 @@
             </div>
             <div class="sidebar">
                 <div class="description">
-                    <h3 v-if="page?.data?.title?.[0]?.text">{{ page.data.title[0].text }}</h3>
+                    <h3>{{ page.data.title[0].text }}</h3>
                     <p v-for="text in description">{{ text.text }}</p>
                 </div>
                 <div class="sidebar-images">
@@ -90,8 +90,8 @@ if (!page.value || !page.value.data) {
     // This situation should ideally be handled by the error thrown above.
     // If execution reaches here, it's an unexpected state.
     console.error("Project data is not available after fetch.");
-    // Throw error to show 404 page
-    throw createError({ statusCode: 404, message: "Project not found" });
+    // You might want to throw an error or set default empty values for prismicDocData and description
+    // to prevent further errors, though Nuxt's error page should take over from createError.
 }
 
 // Use .value to access Ref data in <script setup>
@@ -115,8 +115,8 @@ for (const key in prismicDocData) {
 
 const images = imageUrls; // This is a non-reactive copy. Fine if imageUrls is populated once.
 
-// Split images: main gallery gets ~2/3, sidebar gets ~1/3 (matching the 2fr 1fr grid ratio)
-const sidebarImageCount = Math.max(1, Math.floor(imageUrls.length / 3));
+// Split images: main gallery gets all but the last 3, sidebar gets the last 3
+const sidebarImageCount = Math.min(3, Math.floor(imageUrls.length * 0.25));
 const mainGalleryImages = imageUrls.slice(0, imageUrls.length - sidebarImageCount);
 const sidebarImages = imageUrls.slice(imageUrls.length - sidebarImageCount);
 
@@ -167,11 +167,7 @@ const detailsSection = ref(null);
 
 const scrollToDetails = () => {
     if (detailsSection.value) {
-        const elementPosition = detailsSection.value.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - 64; // 4rem offset for navbar
-        
-        window.scrollTo({
-            top: offsetPosition,
+        detailsSection.value.scrollIntoView({
             behavior: "smooth",
         });
     }
@@ -413,7 +409,7 @@ main {
 .details {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 10px;
+    gap: 2rem;
     padding: 2rem 4rem;
 }
 
@@ -424,12 +420,10 @@ main {
 
 .sidebar {
     /* Natural flow: description first, then images */
-    display: block;
 }
 
 .description {
     margin-bottom: 2rem;
-    margin-left: 0.5rem;
 }
 
 .description>p {
@@ -446,7 +440,7 @@ main {
 }
 
 .sidebar-images .image-item {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 
@@ -473,7 +467,7 @@ main {
 }
 
 .image-item:hover {
-    transform: translateY(-10px);
+    transform: scale(1.05);
     cursor: pointer;
 }
 
@@ -527,15 +521,6 @@ main {
     /* Show rotate button on mobile */
     .rotate-btn {
         display: block;
-    }
-
-    #hero>h2 {
-        font-size: 1.8rem;
-    }
-
-    .down-arrow {
-        width: 2rem;
-        height: 2rem;
     }
 }
 </style>
